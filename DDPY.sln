@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DDPY", "DDPY\DDPY.vbproj", "{2E5831E9-0166-46EA-A9E2-BC637B62D5E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2326A4FC-7F22-433B-B826-9189A3881F4B}"
+	ProjectSection(SolutionItems) = preProject
+		DDPY\DDPY.csv = DDPY\DDPY.csv
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E5831E9-0166-46EA-A9E2-BC637B62D5E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5831E9-0166-46EA-A9E2-BC637B62D5E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5831E9-0166-46EA-A9E2-BC637B62D5E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5831E9-0166-46EA-A9E2-BC637B62D5E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6BE534F-32A1-481D-9312-098F85529602}
+	EndGlobalSection
+EndGlobal
