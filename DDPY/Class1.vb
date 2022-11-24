@@ -10,5 +10,8 @@
     Public Shared Lengthlist(91) As String
     Public Shared Difflist(91) As String
     Public Shared days(7) As String
+    Public Shared banged As Boolean
+    Public Shared presorted As String
+
 End Class
 

@@ -40,7 +40,6 @@ Partial Class Form1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.openFD = New System.Windows.Forms.OpenFileDialog()
         Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,16 +227,6 @@ Partial Class Form1
         Me.ProgressBar1.Size = New System.Drawing.Size(745, 23)
         Me.ProgressBar1.TabIndex = 17
         '
-        'Button2
-        '
-        Me.Button2.Enabled = False
-        Me.Button2.Location = New System.Drawing.Point(668, 12)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(101, 23)
-        Me.Button2.TabIndex = 19
-        Me.Button2.Text = "Import CSV"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'openFD
         '
         Me.openFD.FileName = "OpenFileDialog1"
@@ -257,7 +246,6 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(781, 525)
         Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -276,6 +264,7 @@ Partial Class Form1
         Me.Controls.Add(Me.sldMinDif)
         Me.Controls.Add(Me.sldMinLen)
         Me.Name = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "DDPY Workout Generator"
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sldMinDif, System.ComponentModel.ISupportInitialize).EndInit()
@@ -304,7 +293,6 @@ Partial Class Form1
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents Label2 As Windows.Forms.Label
     Friend WithEvents ProgressBar1 As Windows.Forms.ProgressBar
-    Friend WithEvents Button2 As Windows.Forms.Button
     Friend WithEvents openFD As Windows.Forms.OpenFileDialog
     Friend WithEvents Button3 As Windows.Forms.Button
 End Class

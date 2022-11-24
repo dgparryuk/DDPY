@@ -7,6 +7,7 @@ Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.IO
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar
 
 Module mainModule
 
@@ -20,7 +21,7 @@ End Module
 Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        GlobalVariables.banged = 0
     End Sub
     Private Sub sldMinLen_Scroll(sender As Object, e As EventArgs) Handles sldMinLen.Scroll
         If sldMinLen.Value > sldMaxLen.Value Then sldMaxLen.Value = sldMinLen.Value
@@ -44,23 +45,12 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        'Dim daycount As Integer = 0
-        'Dim splitString As String()
-        'Dim totalworkouts As Integer = 0
-        'Dim workoutsdone As Integer = 0
+        GlobalVariables.workoutsdone = 0
         GlobalVariables.daycount = CheckedListBox2.CheckedItems.Count
         For i = 0 To 6
             GlobalVariables.days(i) = CheckedListBox2.GetItemChecked(i)
         Next
-        'Dim fileLines As String() = System.IO.File.ReadAllLines("DDPY.csv")
-        'Dim linegrab As Integer
-
         GlobalVariables.totalworkouts = GlobalVariables.daycount * 13
-        'Dim workoutlist(totalworkouts) As String
-        'Dim instructorlist(totalworkouts) As String
-        'Dim Lengthlist(totalworkouts) As String
-        'Dim Difflist(totalworkouts) As String
-
         Do Until GlobalVariables.workoutsdone = GlobalVariables.totalworkouts
             Randomize()
             GlobalVariables.linegrab = Int(GlobalVariables.fileLines.GetUpperBound(0) * Rnd())
@@ -70,17 +60,10 @@ Public Class Form1
             'GlobalVariables.splitString(2) = Workout Length
             'GlobalVariables.splitString(3) = Workout Difficulty
 
-            'For index As Integer = 0 To (CheckedListBox1.Items.Count - 1)
-            'MsgBox(CheckedListBox1.GetItemChecked(index))
-            'Next
             If GlobalVariables.splitString(3) >= sldMinDif.Value And GlobalVariables.splitString(3) <= sldMaxDif.Value Then
                 If GlobalVariables.splitString(2) >= sldMinLen.Value And GlobalVariables.splitString(2) <= sldMaxLen.Value Then
                     For i = 0 To CheckedListBox1.Items.Count - 1
-                        'You can replace As Object by your object type
-                        'ex : Dim Item As String = CType(CheckedListBox1.Items(i), String)
                         Dim Item As Object = CheckedListBox1.Items(i)
-
-                        'We ask if this item is checked or not
                         If CheckedListBox1.GetItemChecked(i) = True And Item = GlobalVariables.splitString(1) Then
                             GlobalVariables.workoutsdone = GlobalVariables.workoutsdone + 1
                             ProgressBar1.Value = (GlobalVariables.workoutsdone \ GlobalVariables.totalworkouts) * 100
@@ -93,6 +76,7 @@ Public Class Form1
                 End If
             End If
         Loop
+        GlobalVariables.banged = True
         Call New Form2().Show()
     End Sub
 
@@ -141,7 +125,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         Dim update As String = Application.StartupPath & "\DDPY.csv"
         Dim NewCopy As String
 
@@ -385,14 +369,15 @@ Public Class Form1
                                                     Instructorsname = "DDP"
                                             End Select
                                         End If
-                                            'Write out to file only use wname, wlength, wdifficulty and instructorsname
-                                            outputtext = outputtext & wname & "," & Instructorsname & "," & Wlength.Substring(0, (Len(Wlength) - 4)) & "," & Wdifficulty & vbCrLf
-                                            'csvoutput = csvoutput + 1
+                                        'Write out to file only use wname, wlength, wdifficulty and instructorsname
+                                        outputtext = outputtext & wname & "," & Instructorsname & "," & Wlength.Substring(0, (Len(Wlength) - 4)) & "," & Wdifficulty & vbCrLf
+                                        'csvoutput = csvoutput + 1
 
-                                        End If
                                     End If
+                                End If
+                                'End If
                             End If
-                    End Select
+                End Select
                 End If
             End If
         Next
