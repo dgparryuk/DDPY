@@ -160,6 +160,7 @@ Partial Class Form1
         '
         'CheckedListBox1
         '
+        Me.CheckedListBox1.CheckOnClick = True
         Me.CheckedListBox1.FormattingEnabled = True
         Me.CheckedListBox1.Items.AddRange(New Object() {"Arinitra Chandler", "Bobby ", "Christina Russell", "Dave Orth", "DDP", "Dylan ", "Garett Sakahara", "Haydn Walden", "Jen ", "Jim Mabes", "Josh ", "King Warren", "Lexy ", "Paal ", "Pat McDermott", "Payge McMahon", "Ricky Tran ", "Roman ", "Scott French ", "Stevie Richards", "Travis ", "Yoga Doc"})
         Me.CheckedListBox1.Location = New System.Drawing.Point(23, 351)
@@ -170,6 +171,7 @@ Partial Class Form1
         '
         'CheckedListBox2
         '
+        Me.CheckedListBox2.CheckOnClick = True
         Me.CheckedListBox2.FormattingEnabled = True
         Me.CheckedListBox2.Items.AddRange(New Object() {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"})
         Me.CheckedListBox2.Location = New System.Drawing.Point(599, 351)

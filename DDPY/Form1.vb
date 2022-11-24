@@ -471,17 +471,17 @@ Public Class Form1
     End Sub
 
     Private Sub txtMaxDif_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMaxDif.KeyPress
-        'If Asc(e.KeyChar) <> 8 Then
-        '    If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
-        '        e.Handled = True
-        '    End If
-        'End If
-        'If txtMaxDif.Text <> "" And txtMinDif.Text <> "" Then
-        '    If sldMaxDif.Value > sldMinDif.Value Then
-        '        sldMinDif.Value = sldMaxDif.Value
-        '    End If
-        '    sldMinDif.Value = txtMinDif.Text
-        '    sldMaxDif.Value = txtMaxDif.Text
-        'End If
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+        If txtMaxDif.Text <> "" And txtMinDif.Text <> "" Then
+            If sldMaxDif.Value > sldMinDif.Value Then
+                sldMinDif.Value = sldMaxDif.Value
+            End If
+            sldMinDif.Value = txtMinDif.Text
+            sldMaxDif.Value = txtMaxDif.Text
+        End If
     End Sub
 End Class
