@@ -1,0 +1,31 @@
+				'take this part and do 0 to x (total worksouts over 13 weeks)
+				then have 101 *4 lines with each one in (can probably code generate the code)
+					GlobalVariables.workoutsdone = 0
+                    For i = 0 To 91 - 1
+                            GlobalVariables.workoutsdone = GlobalVariables.workoutsdone + 1
+                            ProgressBar1.Value = (GlobalVariables.workoutsdone \ GlobalVariables.totalworkouts) * 100
+                            
+							GlobalVariables.workoutlist(GlobalVariables.workoutsdone) = ""
+                            GlobalVariables.instructorlist(GlobalVariables.workoutsdone) = ""
+                            GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) = ""
+                            GlobalVariables.Difflist(GlobalVariables.workoutsdone) = ""
+							
+                        End If
+                    Next
+
+        Call New Form2().Show()
+
+
+=================
+Classic 		- Beginner, Intermdiate, Advanced
+V2				- Beginner, Intermdiate, Advanced
+Alt(mix of both)- Beginner, Intermdiate, Advanced
+Stand Strong
+Bed Flex
+New Back Pain x 2
+
+Jacked
+=================
+on display screen - highlight each week for eacy following (either altnetate colours and/or checkbox for each week)
+possibly a refresh button per workout? incase you want to replace one
+graduate tick box - start lower levels and shorter workouts

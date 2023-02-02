@@ -35,11 +35,37 @@ Public Class Form1
     End Sub
     Private Sub sldMinDif_Scroll(sender As Object, e As EventArgs) Handles sldMinDif.Scroll
         If sldMinDif.Value > sldMaxDif.Value Then sldMaxDif.Value = sldMinDif.Value
+        Select Case sldMinDif.Value
+            Case 1
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\green.png")
+            Case 2
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\blue.png")
+            Case 3
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\yellow.png")
+            Case 4
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\orange.png")
+            Case 5
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\red.png")
+
+        End Select
         txtMinDif.Text = sldMinDif.Value
         txtMaxDif.Text = sldMaxDif.Value
     End Sub
     Private Sub sldMaxDif_Scroll(sender As Object, e As EventArgs) Handles sldMaxDif.Scroll
         If sldMaxDif.Value < sldMinDif.Value Then sldMinDif.Value = sldMaxDif.Value
+        Select Case sldMinDif.Value
+            Case 1
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\green.png")
+            Case 2
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\blue.png")
+            Case 3
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\yellow.png")
+            Case 4
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\orange.png")
+            Case 5
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\red.png")
+
+        End Select
         txtMaxDif.Text = sldMaxDif.Value
         txtMinDif.Text = sldMinDif.Value
     End Sub
@@ -59,9 +85,11 @@ Public Class Form1
             'GlobalVariables.splitString(1) = Instructor
             'GlobalVariables.splitString(2) = Workout Length
             'GlobalVariables.splitString(3) = Workout Difficulty
+            'GlobalVariables.splitString(4) = Tags
 
             If GlobalVariables.splitString(3) >= sldMinDif.Value And GlobalVariables.splitString(3) <= sldMaxDif.Value Then
                 If GlobalVariables.splitString(2) >= sldMinLen.Value And GlobalVariables.splitString(2) <= sldMaxLen.Value Then
+                    'if GlobalVariables.splitString(2) doesnt contain contains
                     For i = 0 To CheckedListBox1.Items.Count - 1
                         Dim Item As Object = CheckedListBox1.Items(i)
                         If CheckedListBox1.GetItemChecked(i) = True And Item = GlobalVariables.splitString(1) Then
@@ -73,6 +101,7 @@ Public Class Form1
                             GlobalVariables.Difflist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(3)
                         End If
                     Next
+                    'end if
                 End If
             End If
         Loop
@@ -377,7 +406,7 @@ Public Class Form1
                                 End If
                                 'End If
                             End If
-                End Select
+                    End Select
                 End If
             End If
         Next
@@ -468,5 +497,9 @@ Public Class Form1
             sldMinDif.Value = txtMinDif.Text
             sldMaxDif.Value = txtMaxDif.Text
         End If
+    End Sub
+
+    Private Sub picDiff_Click(sender As Object, e As EventArgs) Handles picMinDiff.Click
+
     End Sub
 End Class
