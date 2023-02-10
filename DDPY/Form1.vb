@@ -48,8 +48,6 @@ Public Class Form1
                 picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\red.png")
 
         End Select
-        txtMinDif.Text = sldMinDif.Value
-        txtMaxDif.Text = sldMaxDif.Value
     End Sub
     Private Sub sldMaxDif_Scroll(sender As Object, e As EventArgs) Handles sldMaxDif.Scroll
         If sldMaxDif.Value < sldMinDif.Value Then sldMinDif.Value = sldMaxDif.Value
@@ -66,8 +64,6 @@ Public Class Form1
                 picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\red.png")
 
         End Select
-        txtMaxDif.Text = sldMaxDif.Value
-        txtMinDif.Text = sldMinDif.Value
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -477,41 +473,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub txtMinDif_KeyPress(sender As Object, e As KeyPressEventArgs)
-        If Asc(e.KeyChar) <> 8 Then
-            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
-                e.Handled = True
-            End If
-        End If
-        If txtMaxDif.Text <> "" And txtMinDif.Text <> "" Then
-            If sldMinDif.Value > sldMaxDif.Value Then
-                sldMaxDif.Value = sldMinDif.Value
-            End If
-            sldMinDif.Value = txtMinDif.Text
-            sldMaxDif.Value = txtMaxDif.Text
-        End If
-
-    End Sub
-
-    Private Sub txtMaxDif_KeyPress(sender As Object, e As KeyPressEventArgs)
-        If Asc(e.KeyChar) <> 8 Then
-            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
-                e.Handled = True
-            End If
-        End If
-        If txtMaxDif.Text <> "" And txtMinDif.Text <> "" Then
-            If sldMaxDif.Value > sldMinDif.Value Then
-                sldMinDif.Value = sldMaxDif.Value
-            End If
-            sldMinDif.Value = txtMinDif.Text
-            sldMaxDif.Value = txtMaxDif.Text
-        End If
-    End Sub
-
-    Private Sub picDiff_Click(sender As Object, e As EventArgs) Handles picMinDiff.Click
-
-    End Sub
-
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
 
         openFD.InitialDirectory = "C:\"
@@ -809,3 +770,4 @@ Public Class Form1
 
 
     End Sub
+End Class

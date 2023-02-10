@@ -76,7 +76,7 @@ Partial Class Form1
         '
         'sldMinLen
         '
-        Me.sldMinLen.Location = New System.Drawing.Point(22, 181)
+        Me.sldMinLen.Location = New System.Drawing.Point(10, 16)
         Me.sldMinLen.Maximum = 90
         Me.sldMinLen.Name = "sldMinLen"
         Me.sldMinLen.Size = New System.Drawing.Size(473, 45)
@@ -96,7 +96,7 @@ Partial Class Form1
         'sldMaxLen
         '
         Me.sldMaxLen.AutoSize = False
-        Me.sldMaxLen.Location = New System.Drawing.Point(10, 54)
+        Me.sldMaxLen.Location = New System.Drawing.Point(10, 65)
         Me.sldMaxLen.Maximum = 90
         Me.sldMaxLen.Name = "sldMaxLen"
         Me.sldMaxLen.Size = New System.Drawing.Size(473, 45)
@@ -106,7 +106,7 @@ Partial Class Form1
         'sldMaxDif
         '
         Me.sldMaxDif.LargeChange = 1
-        Me.sldMaxDif.Location = New System.Drawing.Point(6, 60)
+        Me.sldMaxDif.Location = New System.Drawing.Point(6, 65)
         Me.sldMaxDif.Maximum = 5
         Me.sldMaxDif.Minimum = 1
         Me.sldMaxDif.Name = "sldMaxDif"
@@ -164,7 +164,7 @@ Partial Class Form1
         Me.CheckedListBox2.CheckOnClick = True
         Me.CheckedListBox2.FormattingEnabled = True
         Me.CheckedListBox2.Items.AddRange(New Object() {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"})
-        Me.CheckedListBox2.Location = New System.Drawing.Point(6, 19)
+        Me.CheckedListBox2.Location = New System.Drawing.Point(6, 41)
         Me.CheckedListBox2.MultiColumn = True
         Me.CheckedListBox2.Name = "CheckedListBox2"
         Me.CheckedListBox2.Size = New System.Drawing.Size(166, 109)
@@ -175,7 +175,7 @@ Partial Class Form1
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Location = New System.Drawing.Point(6, 134)
+        Me.CheckBox1.Location = New System.Drawing.Point(6, 17)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(70, 17)
         Me.CheckBox1.TabIndex = 12
@@ -271,6 +271,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.sldMaxLen)
         Me.GroupBox1.Controls.Add(Me.txtMinLen)
         Me.GroupBox1.Controls.Add(Me.txtMaxLen)
+        Me.GroupBox1.Controls.Add(Me.sldMinLen)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 160)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(538, 112)
@@ -404,13 +405,13 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(787, 589)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.sldMinLen)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox3)
@@ -446,7 +447,6 @@ Partial Class Form1
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox8.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
