@@ -53,7 +53,7 @@ Public Class Form1
     End Sub
     Private Sub sldMaxDif_Scroll(sender As Object, e As EventArgs) Handles sldMaxDif.Scroll
         If sldMaxDif.Value < sldMinDif.Value Then sldMinDif.Value = sldMaxDif.Value
-        Select Case sldMinDif.Value
+        Select Case sldMaxDif.Value
             Case 1
                 picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\green.png")
             Case 2
@@ -71,10 +71,19 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        GlobalVariables.MaxDif = sldMaxDif.Value
+        GlobalVariables.MinDif = sldMinDif.Value
+        GlobalVariables.MaxLen = sldMaxLen.Value
+        GlobalVariables.MinLen = sldMinLen.Value
+
         GlobalVariables.workoutsdone = 0
         GlobalVariables.daycount = CheckedListBox2.CheckedItems.Count
         For i = 0 To 6
             GlobalVariables.days(i) = CheckedListBox2.GetItemChecked(i)
+        Next
+        For i = 0 To 22
+            GlobalVariables.ListofInstructors(i) = CheckedListBox1.Items(i)
+            GlobalVariables.ListofInstructorsChecked(i) = CheckedListBox1.GetItemChecked(i)
         Next
         GlobalVariables.totalworkouts = GlobalVariables.daycount * 13
         Do Until GlobalVariables.workoutsdone = GlobalVariables.totalworkouts
@@ -87,12 +96,12 @@ Public Class Form1
             'GlobalVariables.splitString(3) = Workout Difficulty
             'GlobalVariables.splitString(4) = Tags
 
-            If GlobalVariables.splitString(3) >= sldMinDif.Value And GlobalVariables.splitString(3) <= sldMaxDif.Value Then
-                If GlobalVariables.splitString(2) >= sldMinLen.Value And GlobalVariables.splitString(2) <= sldMaxLen.Value Then
-                    'if GlobalVariables.splitString(2) doesnt contain contains
-                    For i = 0 To CheckedListBox1.Items.Count - 1
-                        Dim Item As Object = CheckedListBox1.Items(i)
-                        If CheckedListBox1.GetItemChecked(i) = True And Item = GlobalVariables.splitString(1) Then
+            If GlobalVariables.splitString(3) >= GlobalVariables.MinDif And GlobalVariables.splitString(3) <= GlobalVariables.MaxDif Then
+                If GlobalVariables.splitString(2) >= GlobalVariables.MinLen And GlobalVariables.splitString(2) <= GlobalVariables.MaxLen Then
+                    'if GlobalVariables.splitString(4).contains
+                    For i = 0 To GlobalVariables.ListofInstructors.Count - 1
+                        Dim Item As Object = GlobalVariables.ListofInstructors(i)
+                        If GlobalVariables.ListofInstructorsChecked(i) = True And Item = GlobalVariables.splitString(1) Then
                             GlobalVariables.workoutsdone = GlobalVariables.workoutsdone + 1
                             ProgressBar1.Value = (GlobalVariables.workoutsdone \ GlobalVariables.totalworkouts) * 100
                             GlobalVariables.workoutlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(0)
@@ -146,10 +155,10 @@ Public Class Form1
 
     End Sub
 
-    Private Sub txtMinDif_TextChanged(sender As Object, e As EventArgs) Handles txtMinDif.TextChanged
+    Private Sub txtMinDif_TextChanged(sender As Object, e As EventArgs)
     End Sub
 
-    Private Sub txtMaxDif_TextChanged(sender As Object, e As EventArgs) Handles txtMaxDif.TextChanged
+    Private Sub txtMaxDif_TextChanged(sender As Object, e As EventArgs)
 
 
     End Sub
@@ -173,7 +182,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         MsgBox("log onto DDPYNOW, click on workouts, click on pencil and make sure everyone is ticked, then goto file and 'save page as' then once you've clicked OK on this box select the HTM file you just saved and it will update to the latest workout list")
 
         'system.IO.File.ReadAllLines("DDPY.csv") 'only for memory
@@ -468,7 +477,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub txtMinDif_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMinDif.KeyPress
+    Private Sub txtMinDif_KeyPress(sender As Object, e As KeyPressEventArgs)
         If Asc(e.KeyChar) <> 8 Then
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
                 e.Handled = True
@@ -484,7 +493,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub txtMaxDif_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMaxDif.KeyPress
+    Private Sub txtMaxDif_KeyPress(sender As Object, e As KeyPressEventArgs)
         If Asc(e.KeyChar) <> 8 Then
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
                 e.Handled = True
@@ -502,4 +511,301 @@ Public Class Form1
     Private Sub picDiff_Click(sender As Object, e As EventArgs) Handles picMinDiff.Click
 
     End Sub
-End Class
+
+    Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+
+        openFD.InitialDirectory = "C:\"
+        openFD.Title = "Open a HTML File"
+        openFD.Filter = "DDP Yoga Workouts.htm|DDP Yoga Workouts.htm"
+        openFD.ShowDialog()
+        Dim HTMLFiletext As String() = System.IO.File.ReadAllLines(openFD.FileName)
+        Dim csvFilename As String
+        csvFilename = openFD.FileName
+        csvFilename = csvFilename.Substring(0, Len(csvFilename) - 3) & "csv"
+
+        Dim a = Trim(HTMLFiletext(180))
+
+        'a = System.Text.RegularExpressions.Regex.Replace(a, "Ordinal.....?.?IsActive", "IsActive")
+        ''with comma
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1099,""Name"":""Beginner"",""Ordinal"":1,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Beginner" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1100,""Name"":""Intermediate"",""Ordinal"":3,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Intermediate" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1101,""Name"":""Advanced"",""Ordinal"":4,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Advanced" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1103,""Name"":""DDPY Classics"",""Ordinal"":7,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "DDPY Classics" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1115,""Name"":""DDPY 4 Kids"",""Ordinal"":8,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "DDPY 4 Kids" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1119,""Name"":""DDP LIVE"",""Ordinal"":9,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "DDP LIVE" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1122,""Name"":""Diamond Dozen (The Basics)"",""Ordinal"":10,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Diamond Dozen (The Basics)" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1123,""Name"":""EXTREME"",""Ordinal"":11,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "EXTREME" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1129,""Name"":""No Music"",""Ordinal"":17,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "No Music" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1132,""Name"":""Chair Warrior"",""Ordinal"":77,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Chair Warrior" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1134,""Name"":""Prenatal"",""Ordinal"":12,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Prenatal" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1142,""Name"":""20 Minute Workouts"",""Ordinal"":33,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "20 Minute Workouts" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1144,""Name"":""30 Minute Workouts"",""Ordinal"":35,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "30 Minute Workouts" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1145,""Name"":""40 Minute Workouts"",""Ordinal"":36,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "40 Minute Workouts" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1151,""Name"":""DDPY Rebuild: Bed Flex"",""Ordinal"":13,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "DDPY Rebuild: Bed Flex" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1152,""Name"":""DDPY Rebuild: Chair Force"",""Ordinal"":14,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "DDPY Rebuild: Chair Force" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1153,""Name"":""DDPY Rebuild: Stand Strong"",""Ordinal"":15,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "DDPY Rebuild: Stand Strong" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1157,""Name"":""50 Minute Workouts"",""Ordinal"":38,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "50 Minute Workouts" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1158,""Name"":""60+ Minute Workouts"",""Ordinal"":39,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "60+ Minute Workouts" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1159,""Name"":""Hip, Back and Knee Opener"",""Ordinal"":18,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Hip, Back and Knee Opener" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1169,""Name"":""Christina Russell"",""Ordinal"":19,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Christina Russell" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1170,""Name"":""Haydn Walden"",""Ordinal"":20,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Haydn Walden" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1171,""Name"":""Garett Sakahara"",""Ordinal"":21,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Garett Sakahara" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1172,""Name"":""Jim Mabes"",""Ordinal"":22,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Jim Mabes" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1173,""Name"":""Pat McDermott"",""Ordinal"":23,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Pat McDermott" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1174,""Name"":""Dave Orth"",""Ordinal"":24,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Dave Orth" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1177,""Name"":""Yoga Doc"",""Ordinal"":25,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Yoga Doc" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1178,""Name"":""King Warren"",""Ordinal"":26,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "King Warren" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1179,""Name"":""Arinitra Chandler"",""Ordinal"":27,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Arinitra Chandler" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1180,""Name"":""BONUS DVDs"",""Ordinal"":28,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "BONUS DVDs" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1181,""Name"":""EXTREME 3.0"",""Ordinal"":29,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "EXTREME 3.0" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1183,""Name"":""Stand Up Workouts"",""Ordinal"":30,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Stand Up Workouts" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1184,""Name"":""JACKED 30 min"",""Ordinal"":34,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "JACKED 30 min" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1185,""Name"":""JACKED 50+ min"",""Ordinal"":37,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "JACKED 50+ min" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1195,""Name"":""Chair Force Standing"",""Ordinal"":6,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Chair Force Standing" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1197,""Name"":""Payge McMahon"",""Ordinal"":16,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Payge McMahon" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1198,""Name"":""Holiday/ Novelty"",""Ordinal"":31,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Holiday/ Novelty" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1199,""Name"":""Road Trip Edition"",""Ordinal"":32,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Road Trip Edition" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1200,""Name"":""Josh Nair"",""Ordinal"":111,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Josh Nair" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1201,""Name"":""Ricky Tran"",""Ordinal"":112,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Ricky Tran" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1203,""Name"":""Stand Strong - Warriors Purpose"",""Ordinal"":2,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Stand Strong - Warriors Purpose" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1204,""Name"":""Chair Force - Warriors Purpose"",""Ordinal"":113,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Chair Force - Warriors Purpose" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1205,""Name"":""Bed Flex - Warriors Purpose"",""Ordinal"":114,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Bed Flex - Warriors Purpose" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1206,""Name"":""Scott French"",""Ordinal"":115,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Scott French" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1210,""Name"":""Back Builder"",""Ordinal"":5,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Back Builder" & Chr(34) & "-")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1211,""Name"":""Tom Walent"",""Ordinal"":121,""IsActive"":true,""IsMilitaryOnly"":false},", Chr(34) & "Tom Walent" & Chr(34) & "-")
+        'without comma
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1099,""Name"":""Beginner"",""Ordinal"":1,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Beginner" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1100,""Name"":""Intermediate"",""Ordinal"":3,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Intermediate" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1101,""Name"":""Advanced"",""Ordinal"":4,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Advanced" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1103,""Name"":""DDPY Classics"",""Ordinal"":7,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "DDPY Classics" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1115,""Name"":""DDPY 4 Kids"",""Ordinal"":8,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "DDPY 4 Kids" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1119,""Name"":""DDP LIVE"",""Ordinal"":9,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "DDP LIVE" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1122,""Name"":""Diamond Dozen \(The Basics\)"",""Ordinal"":10,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Diamond Dozen (The Basics)" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1123,""Name"":""EXTREME"",""Ordinal"":11,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "EXTREME" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1129,""Name"":""No Music"",""Ordinal"":17,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "No Music" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1132,""Name"":""Chair Warrior"",""Ordinal"":77,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Chair Warrior" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1134,""Name"":""Prenatal"",""Ordinal"":12,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Prenatal" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1142,""Name"":""20 Minute Workouts"",""Ordinal"":33,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "20 Minute Workouts" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1144,""Name"":""30 Minute Workouts"",""Ordinal"":35,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "30 Minute Workouts" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1145,""Name"":""40 Minute Workouts"",""Ordinal"":36,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "40 Minute Workouts" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1151,""Name"":""DDPY Rebuild: Bed Flex"",""Ordinal"":13,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "DDPY Rebuild: Bed Flex" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1152,""Name"":""DDPY Rebuild: Chair Force"",""Ordinal"":14,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "DDPY Rebuild: Chair Force" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1153,""Name"":""DDPY Rebuild: Stand Strong"",""Ordinal"":15,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "DDPY Rebuild: Stand Strong" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1157,""Name"":""50 Minute Workouts"",""Ordinal"":38,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "50 Minute Workouts" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1158,""Name"":""60\+ Minute Workouts"",""Ordinal"":39,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "60+ Minute Workouts" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1159,""Name"":""Hip, Back and Knee Opener"",""Ordinal"":18,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Hip, Back and Knee Opener" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1169,""Name"":""Christina Russell"",""Ordinal"":19,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Christina Russell" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1170,""Name"":""Haydn Walden"",""Ordinal"":20,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Haydn Walden" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1171,""Name"":""Garett Sakahara"",""Ordinal"":21,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Garett Sakahara" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1172,""Name"":""Jim Mabes"",""Ordinal"":22,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Jim Mabes" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1173,""Name"":""Pat McDermott"",""Ordinal"":23,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Pat McDermott" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1174,""Name"":""Dave Orth"",""Ordinal"":24,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Dave Orth" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1177,""Name"":""Yoga Doc"",""Ordinal"":25,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Yoga Doc" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1178,""Name"":""King Warren"",""Ordinal"":26,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "King Warren" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1179,""Name"":""Arinitra Chandler"",""Ordinal"":27,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Arinitra Chandler" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1180,""Name"":""BONUS DVDs"",""Ordinal"":28,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "BONUS DVDs" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1181,""Name"":""EXTREME 3\.0"",""Ordinal"":29,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "EXTREME 3.0" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1183,""Name"":""Stand Up Workouts"",""Ordinal"":30,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Stand Up Workouts" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1184,""Name"":""JACKED 30 min"",""Ordinal"":34,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "JACKED 30 min" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1185,""Name"":""JACKED 50\+ min"",""Ordinal"":37,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "JACKED 50+ min" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1195,""Name"":""Chair Force Standing"",""Ordinal"":6,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Chair Force Standing" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1197,""Name"":""Payge McMahon"",""Ordinal"":16,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Payge McMahon" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1198,""Name"":""Holiday/ Novelty"",""Ordinal"":31,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Holiday/ Novelty" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1199,""Name"":""Road Trip Edition"",""Ordinal"":32,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Road Trip Edition" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1200,""Name"":""Josh Nair"",""Ordinal"":111,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Josh Nair" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1201,""Name"":""Ricky Tran"",""Ordinal"":112,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Ricky Tran" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1203,""Name"":""Stand Strong - Warriors Purpose"",""Ordinal"":2,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Stand Strong - Warriors Purpose" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1204,""Name"":""Chair Force - Warriors Purpose"",""Ordinal"":113,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Chair Force - Warriors Purpose" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1205,""Name"":""Bed Flex - Warriors Purpose"",""Ordinal"":114,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Bed Flex - Warriors Purpose" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1206,""Name"":""Scott French"",""Ordinal"":115,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Scott French" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1210,""Name"":""Back Builder"",""Ordinal"":5,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Back Builder" & Chr(34))
+        a = System.Text.RegularExpressions.Regex.Replace(a, "{""Id"":1211,""Name"":""Tom Walent"",""Ordinal"":121,""IsActive"":true,""IsMilitaryOnly"":false}", Chr(34) & "Tom Walent" & Chr(34))
+
+        a = System.Text.RegularExpressions.Regex.Replace(a, "},{", "}," & Chr(13) & Chr(10) & "{")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "\[{", "[" & Chr(13) & Chr(10) & "{")
+        a = System.Text.RegularExpressions.Regex.Replace(a, "},""", "}, " & Chr(13) & Chr(10) & """")
+
+        a = System.Text.RegularExpressions.Regex.Replace(a, ":{", ":" & Chr(13) & Chr(10) & "{")
+
+        Dim csv
+        Dim wearein
+        Dim newstr
+        Dim chars
+        csv = a ' your lines
+        ReDim chars(Len(csv) - 1) 'array for output
+        wearein = False
+        For i = 1 To Len(csv)
+            chars(i - 1) = Mid(csv, i, 1)
+            Select Case chars(i - 1)
+                Case Chr(34) 'we're in
+                    wearein = Not wearein
+                Case ","
+                    If wearein Then chars(i - 1) = ""
+            End Select
+        Next
+        newstr = Join(chars, "")
+        System.IO.File.WriteAllText(csvFilename, newstr)
+        Dim outputtext
+        Dim CSVFiletext As String() = System.IO.File.ReadAllLines(csvFilename)
+        Dim splitString
+        Dim Workout
+        Dim Instructor
+        Dim Wtime
+        Dim Difficulty
+        Dim Tags
+        Dim instructortag
+        For x = 1 To CSVFiletext.GetUpperBound(0)
+            If Len(CSVFiletext(x)) > 55 Then
+                splitString = Split(CSVFiletext(x), ",")
+                '1,8,4,3,8
+                'Workout,Instructor,time,Difficulty,Tags
+                '1 - remove first 7 chars & last char
+                '8 - remove first 6 and last char and check for instructor
+                '4 - 10-end
+                '3 - last character
+                '8 - remove first 6 and last char
+                Workout = splitString(1).Substring(9, Len(splitString(1)) - 10)
+                Workout = Replace(Workout, "\u0026", "&")
+                Workout = Replace(Workout, "\u0027", "'")
+
+                instructortag = splitString(8).Substring(8, Len(splitString(8)) - 9)
+                Instructor = ""
+                If instructortag.contains("Arinitra Chandler") = True Then
+                    Instructor = "Arinitra Chandler"
+                End If
+                If instructortag.contains("Bobby") = True Then
+                    Instructor = "Bobby"
+                End If
+                If instructortag.contains("Christina Russell") = True Then
+                    Instructor = "Christina Russell"
+                End If
+                If instructortag.contains("Dave Orth") = True Then
+                    Instructor = "Dave Orth"
+                End If
+                If instructortag.contains("Dylan") = True Then
+                    Instructor = "Dylan"
+                End If
+                If instructortag.contains("Garett Sakahara") = True Then
+                    Instructor = "Garett Sakahara"
+                End If
+                If instructortag.contains("Haydn Walden") = True Then
+                    Instructor = "Haydn Walden"
+                End If
+                If instructortag.contains("Jen") = True Then
+                    Instructor = "Jen"
+                End If
+                If instructortag.contains("Jim Mabes") = True Then
+                    Instructor = "Jim Mabes"
+                End If
+                If instructortag.contains("Josh") = True Then
+                    Instructor = "Josh"
+                End If
+                If instructortag.contains("King Warren") = True Then
+                    Instructor = "King Warren"
+                End If
+                If instructortag.contains("Lexy") = True Then
+                    Instructor = "Lexy"
+                End If
+                If instructortag.contains("Paal") = True Then
+                    Instructor = "Paal"
+                End If
+                If instructortag.contains("Pat McDermott") = True Then
+                    Instructor = "Pat McDermott"
+                End If
+                If instructortag.contains("Payge McMahon") = True Then
+                    Instructor = "Payge McMahon"
+                End If
+                If instructortag.contains("Ricky Tran") = True Then
+                    Instructor = "Ricky Tran"
+                End If
+                If instructortag.contains("Roman") = True Then
+                    Instructor = "Roman"
+                End If
+                If instructortag.contains("Scott French") = True Then
+                    Instructor = "Scott French"
+                End If
+                If instructortag.contains("Stevie Richards") = True Then
+                    Instructor = "Stevie Richards"
+                End If
+                If instructortag.contains("Travis") = True Then
+                    Instructor = "Travis"
+                End If
+                If instructortag.contains("Tom Walent") = True Then
+                    Instructor = "Tom Walent"
+                End If
+                If instructortag.contains("Yoga Doc") = True Then
+                    Instructor = "Yoga Doc"
+                End If
+                If instructortag.contains("DDP") = True Then
+                    Instructor = "DDP"
+                End If
+                Dim f
+                Dim p
+
+                If Instructor = "" Then
+                    f = Len(Workout)
+                    For q = 1 To f - 3
+                        p = Workout.Substring(q, 3)
+                        If p = "w/ " Then
+                            Instructor = Workout.Substring(q + 3, f - q - 3)
+                        End If
+                    Next
+                End If
+                If Instructor = "" Then
+                    For q = 1 To f - 2
+                        p = Workout.Substring(q, 2)
+                        If p = "w " Then
+                            Instructor = Workout.Substring(q + 2, f - q - 2)
+                        End If
+                    Next
+                End If
+                If Instructor = "" Then
+                    For q = 1 To f - 5
+                        p = Workout.Substring(q, 5)
+                        If p = "with " Then
+                            Instructor = Workout.Substring(q + 5, f - q - 5)
+
+                        End If
+                    Next
+                End If
+                If Instructor = "" Or Instructor = "The Belt 2.0" Or Instructor = "Back Pain)" Or Instructor = "Stoppers" Then
+                    Instructor = "DDP"
+                End If
+                If Instructor = "Stevie" Then Instructor = "Stevie Richards"
+
+                Wtime = splitString(4).Substring(11, Len(splitString(4)) - 11)
+                Wtime = Wtime \ 60
+                Difficulty = splitString(3).Substring(Len(splitString(3)) - 1, 1)
+                Tags = splitString(8).Substring(8, Len(splitString(8)) - 9)
+
+                outputtext = outputtext & Trim(Workout) & "," & Trim(Instructor) & "," & Wtime & "," & Difficulty & "," & Tags & vbCrLf
+
+            End If
+        Next
+        System.IO.File.WriteAllText(csvFilename, outputtext)
+
+        Dim lines As New HashSet(Of String)()
+        'Read to file
+        Using sr As StreamReader = New StreamReader(csvFilename)
+            Do While sr.Peek() >= 0
+                lines.Add(sr.ReadLine())
+            Loop
+        End Using
+
+        'Write to file
+        Using sw As StreamWriter = New StreamWriter(csvFilename)
+            For Each line As String In lines
+                sw.WriteLine(line)
+            Next
+        End Using
+
+        Dim update As String = Application.StartupPath & "\DDPY.csv"
+
+        If System.IO.File.Exists(csvFilename) = True Then
+            System.IO.File.Delete(update)
+            System.IO.File.Copy(csvFilename, update)
+            MessageBox.Show("Workouts Updated")
+        End If
+
+
+    End Sub
