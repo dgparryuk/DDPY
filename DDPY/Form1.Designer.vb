@@ -56,6 +56,7 @@ Partial Class Form1
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.cbEnableIncDif = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMinDif, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMaxLen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -339,6 +340,7 @@ Partial Class Form1
         '
         'GroupBox7
         '
+        Me.GroupBox7.Controls.Add(Me.Label1)
         Me.GroupBox7.Controls.Add(Me.cbEnableIncDif)
         Me.GroupBox7.Controls.Add(Me.TextBox3)
         Me.GroupBox7.Controls.Add(Me.TextBox2)
@@ -413,6 +415,14 @@ Partial Class Form1
         Me.cbEnableIncDif.TabIndex = 5
         Me.cbEnableIncDif.Text = "Enable"
         Me.cbEnableIncDif.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(6, 123)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(166, 27)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "to a maximum of 60 mins for min length and 90 mins for max length" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'Form1
         '
@@ -496,4 +506,5 @@ Partial Class Form1
     Friend WithEvents NumericUpDown1 As Windows.Forms.NumericUpDown
     Friend WithEvents GroupBox8 As Windows.Forms.GroupBox
     Friend WithEvents cbEnableIncDif As Windows.Forms.CheckBox
+    Friend WithEvents Label1 As Windows.Forms.Label
 End Class
