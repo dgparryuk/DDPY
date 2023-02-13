@@ -8,6 +8,7 @@ Imports System.Windows.Forms
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.IO
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar
+Imports System.ComponentModel.Design
 
 Module mainModule
 
@@ -74,6 +75,36 @@ Public Class Form1
 
         GlobalVariables.workoutsdone = 0
         GlobalVariables.daycount = CheckedListBox2.CheckedItems.Count
+        For i = 0 To 3
+            Dim exclusive = cblExclusive.Items(i)
+            Dim include = clbInclude.Items(i)
+            Select Case exclusive
+                Case "Stand Strong"
+                    GlobalVariables.exclusiveStandStrong = cblExclusive.GetItemChecked(i)
+                Case "Bed Flex"
+                    GlobalVariables.exclusiveBedFlex = cblExclusive.GetItemChecked(i)
+                Case "Chair Force"
+                    GlobalVariables.exclusiveChairForce = cblExclusive.GetItemChecked(i)
+                Case "Jacked"
+                    GlobalVariables.exclusiveJacked = cblExclusive.GetItemChecked(i)
+            End Select
+            Select Case include
+                Case "Stand Strong"
+                    GlobalVariables.includeStandStrong = clbInclude.GetItemChecked(i)
+                Case "Bed Flex"
+                    GlobalVariables.includeBedFlex = clbInclude.GetItemChecked(i)
+                Case "Chair Force"
+                    GlobalVariables.includeChairForce = clbInclude.GetItemChecked(i)
+                Case "Jacked"
+                    GlobalVariables.includeJacked = clbInclude.GetItemChecked(i)
+            End Select
+            'true 
+        Next
+        If GlobalVariables.exclusiveStandStrong = "True" Then GlobalVariables.includeStandStrong = "True"
+        If GlobalVariables.exclusiveBedFlex = "True" Then GlobalVariables.includeBedFlex = "True"
+        If GlobalVariables.exclusiveChairForce = "True" Then GlobalVariables.includeChairForce = "True"
+        If GlobalVariables.exclusiveJacked = "True" Then GlobalVariables.includeJacked = "True"
+
         For i = 0 To 6
             GlobalVariables.days(i) = CheckedListBox2.GetItemChecked(i)
         Next
@@ -91,24 +122,36 @@ Public Class Form1
             'GlobalVariables.splitString(2) = Workout Length
             'GlobalVariables.splitString(3) = Workout Difficulty
             'GlobalVariables.splitString(4) = Tags
+            Dim tags As String = GlobalVariables.splitString(4)
+            Dim allowed As String
+            If GlobalVariables.exclusiveBedFlex = "True" And tags.Contains("Bed Flex") Then allowed = "yes"
+            If GlobalVariables.exclusiveStandStrong = "True" And tags.Contains("Stand Strong") Then allowed = "yes"
+            If GlobalVariables.exclusiveChairForce = "True" And tags.Contains("Chair Force") Then allowed = "yes"
+            If GlobalVariables.exclusiveJacked = "True" And tags.Contains("JACKED") Then allowed = "yes"
+
+            If GlobalVariables.includeBedFlex = "False" And tags.Contains("Bed Flex") Then allowed = ""
+            If GlobalVariables.includeStandStrong = "False" And tags.Contains("Stand Strong") Then allowed = ""
+            If GlobalVariables.includeChairForce = "False" And tags.Contains("Chair Force") Then allowed = ""
+            If GlobalVariables.includeJacked = "False" And tags.Contains("JACKED") Then allowed = ""
 
             If GlobalVariables.splitString(3) >= GlobalVariables.MinDif And GlobalVariables.splitString(3) <= GlobalVariables.MaxDif Then
                 If GlobalVariables.splitString(2) >= GlobalVariables.MinLen And GlobalVariables.splitString(2) <= GlobalVariables.MaxLen Then
-                    'if GlobalVariables.splitString(4).contains
-                    For i = 0 To GlobalVariables.ListofInstructors.Count - 1
-                        Dim Item As Object = GlobalVariables.ListofInstructors(i)
-                        If GlobalVariables.ListofInstructorsChecked(i) = True And Item = GlobalVariables.splitString(1) Then
-                            GlobalVariables.workoutsdone = GlobalVariables.workoutsdone + 1
-                            ProgressBar1.Value = (GlobalVariables.workoutsdone \ GlobalVariables.totalworkouts) * 100
-                            GlobalVariables.workoutlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(0)
-                            GlobalVariables.instructorlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(1)
-                            GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(2)
-                            GlobalVariables.Difflist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(3)
-                        End If
-                    Next
-                    'end if
+                    If allowed = "yes" Then
+                        For i = 0 To GlobalVariables.ListofInstructors.Count - 1
+                            Dim Item As Object = GlobalVariables.ListofInstructors(i)
+                            If GlobalVariables.ListofInstructorsChecked(i) = True And Item = GlobalVariables.splitString(1) Then
+                                GlobalVariables.workoutsdone = GlobalVariables.workoutsdone + 1
+                                ProgressBar1.Value = (GlobalVariables.workoutsdone \ GlobalVariables.totalworkouts) * 100
+                                GlobalVariables.workoutlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(0)
+                                GlobalVariables.instructorlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(1)
+                                GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(2)
+                                GlobalVariables.Difflist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(3)
+                            End If
+                        Next
+                    End If
                 End If
             End If
+            allowed = ""
         Loop
         GlobalVariables.banged = True
         Call New Form2().Show()
@@ -770,4 +813,5 @@ Public Class Form1
 
 
     End Sub
+
 End Class

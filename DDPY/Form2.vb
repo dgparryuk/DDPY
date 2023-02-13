@@ -55,21 +55,32 @@ Public Class Form2
         'GlobalVariables.splitString(2) = Workout Length
         'GlobalVariables.splitString(3) = Workout Difficulty
         'GlobalVariables.splitString(4) = Tags
+        Dim tags As String = GlobalVariables.splitString(4)
+        Dim allowed As String
+        If GlobalVariables.exclusiveBedFlex = "True" And tags.Contains("Bed Flex") Then allowed = "yes"
+        If GlobalVariables.exclusiveStandStrong = "True" And tags.Contains("Stand Strong") Then allowed = "yes"
+        If GlobalVariables.exclusiveChairForce = "True" And tags.Contains("Chair Force") Then allowed = "yes"
+        If GlobalVariables.exclusiveJacked = "True" And tags.Contains("JACKED") Then allowed = "yes"
+
+        If GlobalVariables.includeBedFlex = "False" And tags.Contains("Bed Flex") Then allowed = ""
+        If GlobalVariables.includeStandStrong = "False" And tags.Contains("Stand Strong") Then allowed = ""
+        If GlobalVariables.includeChairForce = "False" And tags.Contains("Chair Force") Then allowed = ""
+        If GlobalVariables.includeJacked = "False" And tags.Contains("JACKED") Then allowed = ""
 
         If GlobalVariables.splitString(3) >= GlobalVariables.MinDif And GlobalVariables.splitString(3) <= GlobalVariables.MaxDif Then
             If GlobalVariables.splitString(2) >= GlobalVariables.MinLen And GlobalVariables.splitString(2) <= GlobalVariables.MaxLen Then
-                'if GlobalVariables.splitString(4).contains
-                For i = 0 To GlobalVariables.ListofInstructors.Count - 1
-                    Dim Item As Object = GlobalVariables.ListofInstructors(i)
-                    If GlobalVariables.ListofInstructorsChecked(i) = True And Item = GlobalVariables.splitString(1) Then
-                        GlobalVariables.workoutlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(0)
-                        GlobalVariables.instructorlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(1)
-                        GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(2)
-                        GlobalVariables.Difflist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(3)
-                        Me.Controls(controlnametext).Text = GlobalVariables.workoutlist(GlobalVariables.workoutsdone) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(GlobalVariables.workoutsdone) & " - L" & GlobalVariables.Difflist(GlobalVariables.workoutsdone) & " - " & GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) & "mins"
-                    End If
-                Next
-                'end if
+                If allowed = "yes" Then
+                    For i = 0 To GlobalVariables.ListofInstructors.Count - 1
+                        Dim Item As Object = GlobalVariables.ListofInstructors(i)
+                        If GlobalVariables.ListofInstructorsChecked(i) = True And Item = GlobalVariables.splitString(1) Then
+                            GlobalVariables.workoutlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(0)
+                            GlobalVariables.instructorlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(1)
+                            GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(2)
+                            GlobalVariables.Difflist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(3)
+                            Me.Controls(controlnametext).Text = GlobalVariables.workoutlist(GlobalVariables.workoutsdone) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(GlobalVariables.workoutsdone) & " - L" & GlobalVariables.Difflist(GlobalVariables.workoutsdone) & " - " & GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) & "mins"
+                        End If
+                    Next
+                End If
             End If
         End If
     End Sub

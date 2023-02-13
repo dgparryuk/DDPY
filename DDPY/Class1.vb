@@ -19,5 +19,14 @@
     Public Shared MaxLen As Integer
     Public Shared ListofInstructors(22) As String
     Public Shared ListofInstructorsChecked(22) As String
+
+    Public Shared exclusiveStandStrong As String
+    Public Shared exclusiveBedFlex As String
+    Public Shared exclusiveChairForce As String
+    Public Shared exclusiveJacked As String
+    Public Shared includeStandStrong As String
+    Public Shared includeBedFlex As String
+    Public Shared includeChairForce As String
+    Public Shared includeJacked As String
 End Class
 

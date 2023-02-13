@@ -216,6 +216,7 @@ Partial Class Form1
         '
         'clbInclude
         '
+        Me.clbInclude.CheckOnClick = True
         Me.clbInclude.FormattingEnabled = True
         Me.clbInclude.Items.AddRange(New Object() {"Bed Flex", "Chair Force", "Jacked", "Stand Strong"})
         Me.clbInclude.Location = New System.Drawing.Point(8, 17)
@@ -258,6 +259,7 @@ Partial Class Form1
         '
         'cblExclusive
         '
+        Me.cblExclusive.CheckOnClick = True
         Me.cblExclusive.FormattingEnabled = True
         Me.cblExclusive.Items.AddRange(New Object() {"Bed Flex", "Chair Force", "Jacked", "Stand Strong"})
         Me.cblExclusive.Location = New System.Drawing.Point(8, 17)
@@ -317,7 +319,6 @@ Partial Class Form1
         'GroupBox5
         '
         Me.GroupBox5.Controls.Add(Me.clbInclude)
-        Me.GroupBox5.Enabled = False
         Me.GroupBox5.Location = New System.Drawing.Point(657, 373)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(120, 94)
@@ -328,7 +329,6 @@ Partial Class Form1
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.cblExclusive)
-        Me.GroupBox6.Enabled = False
         Me.GroupBox6.Location = New System.Drawing.Point(657, 278)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(120, 89)
