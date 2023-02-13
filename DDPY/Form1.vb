@@ -9,6 +9,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.IO
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar
 Imports System.ComponentModel.Design
+Imports System.Security.Policy
 
 Module mainModule
 
@@ -68,6 +69,8 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim xyz = 0
+        Dim zyx = 0
         GlobalVariables.MaxDif = sldMaxDif.Value
         GlobalVariables.MinDif = sldMinDif.Value
         GlobalVariables.MaxLen = sldMaxLen.Value
@@ -129,6 +132,8 @@ Public Class Form1
             If GlobalVariables.exclusiveChairForce = "True" And tags.Contains("Chair Force") Then allowed = "yes"
             If GlobalVariables.exclusiveJacked = "True" And tags.Contains("JACKED") Then allowed = "yes"
 
+            If GlobalVariables.exclusiveStandStrong = "False" And GlobalVariables.exclusiveBedFlex = "False" And GlobalVariables.exclusiveChairForce = "False" And GlobalVariables.exclusiveJacked = "False" Then allowed = "yes"
+
             If GlobalVariables.includeBedFlex = "False" And tags.Contains("Bed Flex") Then allowed = ""
             If GlobalVariables.includeStandStrong = "False" And tags.Contains("Stand Strong") Then allowed = ""
             If GlobalVariables.includeChairForce = "False" And tags.Contains("Chair Force") Then allowed = ""
@@ -146,12 +151,32 @@ Public Class Form1
                                 GlobalVariables.instructorlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(1)
                                 GlobalVariables.Lengthlist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(2)
                                 GlobalVariables.Difflist(GlobalVariables.workoutsdone) = GlobalVariables.splitString(3)
+                                xyz = xyz + 1
+                                If cbEnableIncDif.Checked = True Then
+                                    'MsgBox(xyz & "-" & NumericUpDown2.Value & "-" & GlobalVariables.MinLen & "-" & GlobalVariables.MaxLen)
+                                    If xyz = GlobalVariables.daycount * NumericUpDown2.Value Then
+                                        GlobalVariables.MinLen = GlobalVariables.MinLen + NumericUpDown1.Value
+                                        GlobalVariables.MaxLen = GlobalVariables.MaxLen + NumericUpDown1.Value
+                                        xyz = 0
+                                    End If
+                                    If GlobalVariables.MinLen > 60 Then
+                                        GlobalVariables.MinLen = 60
+                                    End If
+                                    If GlobalVariables.MaxLen > 90 Then
+                                        GlobalVariables.MaxLen = 90
+                                    End If
+
+                                End If
+
+
                             End If
                         Next
                     End If
                 End If
-            End If
+                End If
             allowed = ""
+
+
         Loop
         GlobalVariables.banged = True
         Call New Form2().Show()

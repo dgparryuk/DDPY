@@ -55,6 +55,7 @@ Partial Class Form1
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.cbEnableIncDif = New System.Windows.Forms.CheckBox()
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMinDif, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMaxLen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -338,22 +339,22 @@ Partial Class Form1
         '
         'GroupBox7
         '
+        Me.GroupBox7.Controls.Add(Me.cbEnableIncDif)
         Me.GroupBox7.Controls.Add(Me.TextBox3)
         Me.GroupBox7.Controls.Add(Me.TextBox2)
         Me.GroupBox7.Controls.Add(Me.TextBox1)
         Me.GroupBox7.Controls.Add(Me.NumericUpDown2)
         Me.GroupBox7.Controls.Add(Me.NumericUpDown1)
-        Me.GroupBox7.Enabled = False
         Me.GroupBox7.Location = New System.Drawing.Point(473, 278)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(178, 102)
+        Me.GroupBox7.Size = New System.Drawing.Size(178, 156)
         Me.GroupBox7.TabIndex = 13
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Difficulty"
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(6, 19)
+        Me.TextBox3.Location = New System.Drawing.Point(6, 42)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(166, 20)
         Me.TextBox3.TabIndex = 4
@@ -361,7 +362,7 @@ Partial Class Form1
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(66, 41)
+        Me.TextBox2.Location = New System.Drawing.Point(66, 64)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(106, 20)
         Me.TextBox2.TabIndex = 3
@@ -369,7 +370,7 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(66, 65)
+        Me.TextBox1.Location = New System.Drawing.Point(66, 88)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(106, 20)
         Me.TextBox1.TabIndex = 2
@@ -377,7 +378,7 @@ Partial Class Form1
         '
         'NumericUpDown2
         '
-        Me.NumericUpDown2.Location = New System.Drawing.Point(6, 66)
+        Me.NumericUpDown2.Location = New System.Drawing.Point(6, 89)
         Me.NumericUpDown2.Name = "NumericUpDown2"
         Me.NumericUpDown2.Size = New System.Drawing.Size(54, 20)
         Me.NumericUpDown2.TabIndex = 1
@@ -385,7 +386,7 @@ Partial Class Form1
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(6, 42)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(6, 65)
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(54, 20)
         Me.NumericUpDown1.TabIndex = 0
@@ -400,6 +401,18 @@ Partial Class Form1
         Me.GroupBox8.TabIndex = 33
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Admin-y Stuff"
+        '
+        'cbEnableIncDif
+        '
+        Me.cbEnableIncDif.AutoSize = True
+        Me.cbEnableIncDif.Checked = True
+        Me.cbEnableIncDif.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbEnableIncDif.Location = New System.Drawing.Point(6, 17)
+        Me.cbEnableIncDif.Name = "cbEnableIncDif"
+        Me.cbEnableIncDif.Size = New System.Drawing.Size(59, 17)
+        Me.cbEnableIncDif.TabIndex = 5
+        Me.cbEnableIncDif.Text = "Enable"
+        Me.cbEnableIncDif.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -482,4 +495,5 @@ Partial Class Form1
     Friend WithEvents NumericUpDown2 As Windows.Forms.NumericUpDown
     Friend WithEvents NumericUpDown1 As Windows.Forms.NumericUpDown
     Friend WithEvents GroupBox8 As Windows.Forms.GroupBox
+    Friend WithEvents cbEnableIncDif As Windows.Forms.CheckBox
 End Class
