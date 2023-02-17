@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2326A4FC-7F22-433B-B826-9189A3881F4B}"
 	ProjectSection(SolutionItems) = preProject
 		DDPY\DDPY.csv = DDPY\DDPY.csv
+		InstructorList.txt = InstructorList.txt
+		WorkoutNumbers.txt = WorkoutNumbers.txt
 	EndProjectSection
 EndProject
 Global

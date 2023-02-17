@@ -12,19 +12,19 @@ Public Class Form2
                     If GlobalVariables.days(i) = True Then
                         Select Case i
                             Case 0
-                                Me.Controls("txtSun" & x).Text = workoutsout & " " & GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
+                                Me.Controls("txtSun" & x).Text = GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
                             Case 1
-                                Me.Controls("txtMon" & x).Text = workoutsout & " " & GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
+                                Me.Controls("txtMon" & x).Text = GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
                             Case 2
-                                Me.Controls("txtTue" & x).Text = workoutsout & " " & GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
+                                Me.Controls("txtTue" & x).Text = GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
                             Case 3
-                                Me.Controls("txtWed" & x).Text = workoutsout & " " & GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
+                                Me.Controls("txtWed" & x).Text = GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
                             Case 4
-                                Me.Controls("txtThur" & x).Text = workoutsout & " " & GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
+                                Me.Controls("txtThur" & x).Text = GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
                             Case 5
-                                Me.Controls("txtFri" & x).Text = workoutsout & " " & GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
+                                Me.Controls("txtFri" & x).Text = GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
                             Case 6
-                                Me.Controls("txtSat" & x).Text = workoutsout & " " & GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
+                                Me.Controls("txtSat" & x).Text = GlobalVariables.workoutlist(workoutsout) & Chr(13) & Chr(10) & GlobalVariables.instructorlist(workoutsout) & " - L" & GlobalVariables.Difflist(workoutsout) & " - " & GlobalVariables.Lengthlist(workoutsout) & "mins"
                         End Select
                         workoutsout = workoutsout + 1
                     End If

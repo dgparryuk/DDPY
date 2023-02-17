@@ -18,12 +18,24 @@ Module mainModule
     End Sub
 End Module
 
-
-
 Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GlobalVariables.banged = 0
+        Dim WorkoutNumbers = System.IO.File.ReadAllLines("WorkoutNumbers.txt")
+        Dim WorkoutNumbersText As String = ""
+        For i = 0 To WorkoutNumbers.GetUpperBound(0)
+            WorkoutNumbersText = WorkoutNumbersText & WorkoutNumbers(i) & vbCrLf
+        Next
+        TextBox4.Text = WorkoutNumbersText
+
+        Dim InstructorNames = System.IO.File.ReadAllLines("InstructorList.txt")
+        Dim InstructorNamesList As String = ""
+        For i = 0 To InstructorNames.GetUpperBound(0)
+            InstructorNamesList = InstructorNamesList & InstructorNames(i) & vbCrLf
+        Next
+        TextBox4.Text = WorkoutNumbersText
+
     End Sub
     Private Sub sldMinLen_Scroll(sender As Object, e As EventArgs) Handles sldMinLen.Scroll
         If sldMinLen.Value > sldMaxLen.Value Then sldMaxLen.Value = sldMinLen.Value
@@ -113,6 +125,8 @@ Public Class Form1
         Next
         For i = 0 To 22
             GlobalVariables.ListofInstructors(i) = CheckedListBox1.Items(i)
+            GlobalVariables.ListofInstructors(i) = System.Text.RegularExpressions.Regex.Replace(GlobalVariables.ListofInstructors(i), " - .(.*)", "")
+            MsgBox(GlobalVariables.ListofInstructors(i))
             GlobalVariables.ListofInstructorsChecked(i) = CheckedListBox1.GetItemChecked(i)
         Next
         GlobalVariables.totalworkouts = GlobalVariables.daycount * 13
@@ -211,22 +225,6 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub txtMinLen_TextChanged(sender As Object, e As EventArgs) Handles txtMinLen.TextChanged
-
-    End Sub
-
-    Private Sub txtMaxLen_TextChanged(sender As Object, e As EventArgs) Handles txtMaxLen.TextChanged
-
-    End Sub
-
-    Private Sub txtMinDif_TextChanged(sender As Object, e As EventArgs)
-    End Sub
-
-    Private Sub txtMaxDif_TextChanged(sender As Object, e As EventArgs)
-
-
-    End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs)
         Dim update As String = Application.StartupPath & "\DDPY.csv"
         Dim NewCopy As String
@@ -240,10 +238,6 @@ Public Class Form1
             System.IO.File.Copy(NewCopy, update)
             MessageBox.Show("File Copied")
         End If
-    End Sub
-
-    Private Sub openFD_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles openFD.FileOk
-
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs)
@@ -542,6 +536,34 @@ Public Class Form1
     End Sub
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+        Dim DifNum1 As Int16 = 0
+        Dim DifNum2 As Int16 = 0
+        Dim DifNum3 As Int16 = 0
+        Dim DifNum4 As Int16 = 0
+        Dim DifNum5 As Int16 = 0
+        Dim ArinitraChandlerNum As Int16 = 0
+        Dim BobbyNum As Int16 = 0
+        Dim ChristinaRussellNum As Int16 = 0
+        Dim DaveOrthNum As Int16 = 0
+        Dim DDPNum As Int16 = 0
+        Dim DylanNum As Int16 = 0
+        Dim GarettSakaharaNum As Int16 = 0
+        Dim HaydnWaldenNum As Int16 = 0
+        Dim JenNum As Int16 = 0
+        Dim JimMabesNum As Int16 = 0
+        Dim JoshNum As Int16 = 0
+        Dim KingWarrenNum As Int16 = 0
+        Dim LexyNum As Int16 = 0
+        Dim PaalNum As Int16 = 0
+        Dim PatMcDermottNum As Int16 = 0
+        Dim PaygeMcMahonNum As Int16 = 0
+        Dim RickyTranNum As Int16 = 0
+        Dim RomanNum As Int16 = 0
+        Dim ScottFrenchNum As Int16 = 0
+        Dim StevieRichardsNum As Int16 = 0
+        Dim TomWalentNum As Int16 = 0
+        Dim TravisNum As Int16 = 0
+        Dim YogaDocNum As Int16 = 0
 
         openFD.InitialDirectory = "C:\"
         openFD.Title = "Open a HTML File"
@@ -810,9 +832,10 @@ Public Class Form1
                 outputtext = outputtext & Trim(Workout) & "," & Trim(Instructor) & "," & Wtime & "," & Difficulty & "," & Tags & vbCrLf
 
             End If
+            'For x = 1 To CSVFiletext.GetUpperBound(0)
+            ProgressBar1.Value = (x \ CSVFiletext.GetUpperBound(0)) * 33
         Next
         System.IO.File.WriteAllText(csvFilename, outputtext)
-
         Dim lines As New HashSet(Of String)()
         'Read to file
         Using sr As StreamReader = New StreamReader(csvFilename)
@@ -820,22 +843,108 @@ Public Class Form1
                 lines.Add(sr.ReadLine())
             Loop
         End Using
-
+        ProgressBar1.Value = 66
         'Write to file
         Using sw As StreamWriter = New StreamWriter(csvFilename)
             For Each line As String In lines
                 sw.WriteLine(line)
+                Dim splitline = Split(line, ",")
+                'line(1) is instructor
+                'line(3) is level
+                'copy below for all instructors too
+
+                Select Case splitline(3)
+                    Case "1"
+                        DifNum1 = DifNum1 + 1
+                    Case "2"
+                        DifNum2 = DifNum2 + 1
+                    Case "3"
+                        DifNum3 = DifNum3 + 1
+                    Case "4"
+                        DifNum4 = DifNum4 + 1
+                    Case "5"
+                        DifNum5 = DifNum5 + 1
+                End Select
+
+                Select Case splitline(1)
+                    Case "Arinitra Chandler"
+                        ArinitraChandlerNum = ArinitraChandlerNum + 1
+                    Case "Bobby"
+                        BobbyNum = BobbyNum + 1
+                    Case "Christina Russell"
+                        ChristinaRussellNum = ChristinaRussellNum + 1
+                    Case "Dave Orth"
+                        DaveOrthNum = DaveOrthNum + 1
+                    Case "DDP"
+                        DDPNum = DDPNum + 1
+                    Case "Dylan"
+                        DylanNum = DylanNum + 1
+                    Case "Garett Sakahara"
+                        GarettSakaharaNum = GarettSakaharaNum + 1
+                    Case "Haydn Walden"
+                        HaydnWaldenNum = HaydnWaldenNum + 1
+                    Case "Jen"
+                        JenNum = JenNum + 1
+                    Case "Jim Mabes"
+                        JimMabesNum = JimMabesNum + 1
+                    Case "Josh"
+                        JoshNum = JoshNum + 1
+                    Case "King Warren"
+                        KingWarrenNum = KingWarrenNum + 1
+                    Case "Lexy"
+                        LexyNum = LexyNum + 1
+                    Case "Paal"
+                        PaalNum = PaalNum + 1
+                    Case "Pat McDermott"
+                        PatMcDermottNum = PatMcDermottNum + 1
+                    Case "Payge McMahon"
+                        PaygeMcMahonNum = PaygeMcMahonNum + 1
+                    Case "Ricky Tran"
+                        RickyTranNum = RickyTranNum + 1
+                    Case "Roman"
+                        RomanNum = RomanNum + 1
+                    Case "Scott French"
+                        ScottFrenchNum = ScottFrenchNum + 1
+                    Case "Stevie Richards"
+                        StevieRichardsNum = StevieRichardsNum + 1
+                    Case "Tom Walent"
+                        TomWalentNum = TomWalentNum + 1
+                    Case "Travis"
+                        TravisNum = TravisNum + 1
+                    Case "Yoga Doc"
+                        YogaDocNum = YogaDocNum + 1
+
+                End Select
+
             Next
         End Using
 
+        Dim workoutnumbers As String
+        workoutnumbers = "Level 1 - " & DifNum1 & vbCrLf & "Level 2 - " & DifNum2 & vbCrLf & "Level 3 - " & DifNum3 & vbCrLf & "Level 4 - " & DifNum4 & vbCrLf & "Level 5 - " & DifNum5 & vbCrLf & "Total   - " & (DifNum1 + DifNum2 + DifNum3 + DifNum4 + DifNum5)
+        System.IO.File.WriteAllText("WorkoutNumbers.txt", workoutnumbers)
+        TextBox4.Text = workoutnumbers
+        Dim instructorlistnum As String = ""
+        instructorlistnum = "Arinitra Chandler - (" & ArinitraChandlerNum & ")" & vbCrLf & "Bobby - (" & BobbyNum & ")" & vbCrLf & "Christina Russell - (" & ChristinaRussellNum & ")" & vbCrLf & "Dave Orth - (" & DaveOrthNum & ")" & vbCrLf & "DDP - (" & DDPNum & ")" & vbCrLf & "Dylan - (" & DylanNum & ")" & vbCrLf & "Garett Sakahara - (" & GarettSakaharaNum & ")" & vbCrLf & "Haydn Walden - (" & HaydnWaldenNum & ")" & vbCrLf & "Jen - (" & JenNum & ")" & vbCrLf & "Jim Mabes - (" & JimMabesNum & ")" & vbCrLf & "Josh - (" & JoshNum & ")" & vbCrLf & "King Warren - (" & KingWarrenNum & ")" & vbCrLf & "Lexy - (" & LexyNum & ")" & vbCrLf & "Paal - (" & PaalNum & ")" & vbCrLf & "Pat McDermott - (" & PatMcDermottNum & ")" & vbCrLf & "Payge McMahon - (" & PaygeMcMahonNum & ")" & vbCrLf & "Ricky Tran - (" & RickyTranNum & ")" & vbCrLf & "Roman - (" & RomanNum & ")" & vbCrLf & "Scott French - (" & ScottFrenchNum & ")" & vbCrLf & "Stevie Richards - (" & StevieRichardsNum & ")" & vbCrLf & "Tom Walent - (" & TomWalentNum & ")" & vbCrLf & "Travis - (" & TravisNum & ")" & vbCrLf & "Yoga Doc - (" & YogaDocNum & ")" & vbCrLf
+        System.IO.File.WriteAllText("InstructorList.txt", instructorlistnum)
+        Dim InstructorList = System.IO.File.ReadAllLines("InstructorList.txt")
+        CheckedListBox1.Items.Clear()
+        CheckedListBox1.Items.AddRange(InstructorList)
+        If CheckBox2.Checked = True Then
+            For i As Integer = 0 To CheckedListBox1.Items.Count - 1
+                CheckedListBox1.SetItemChecked(i, CheckState.Checked)
+            Next
+        End If
+
         Dim update As String = Application.StartupPath & "\DDPY.csv"
+
+        ProgressBar1.Value = 100
 
         If System.IO.File.Exists(csvFilename) = True Then
             System.IO.File.Delete(update)
             System.IO.File.Copy(csvFilename, update)
             MessageBox.Show("Workouts Updated")
         End If
-
+        ProgressBar1.Value = 0
 
     End Sub
 

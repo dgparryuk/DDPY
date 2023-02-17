@@ -49,14 +49,15 @@ Partial Class Form1
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbEnableIncDif = New System.Windows.Forms.CheckBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.cbEnableIncDif = New System.Windows.Forms.CheckBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMinDif, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMaxLen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,7 +92,7 @@ Partial Class Form1
         Me.sldMinDif.Maximum = 5
         Me.sldMinDif.Minimum = 1
         Me.sldMinDif.Name = "sldMinDif"
-        Me.sldMinDif.Size = New System.Drawing.Size(120, 45)
+        Me.sldMinDif.Size = New System.Drawing.Size(174, 45)
         Me.sldMinDif.TabIndex = 1
         Me.sldMinDif.Value = 1
         '
@@ -112,15 +113,15 @@ Partial Class Form1
         Me.sldMaxDif.Maximum = 5
         Me.sldMaxDif.Minimum = 1
         Me.sldMaxDif.Name = "sldMaxDif"
-        Me.sldMaxDif.Size = New System.Drawing.Size(120, 45)
+        Me.sldMaxDif.Size = New System.Drawing.Size(174, 45)
         Me.sldMaxDif.TabIndex = 3
         Me.sldMaxDif.Value = 5
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 525)
+        Me.Button1.Location = New System.Drawing.Point(12, 484)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(765, 23)
+        Me.Button1.Size = New System.Drawing.Size(974, 23)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Bang!"
         Me.Button1.UseVisualStyleBackColor = True
@@ -152,12 +153,13 @@ Partial Class Form1
         'CheckedListBox1
         '
         Me.CheckedListBox1.CheckOnClick = True
+        Me.CheckedListBox1.ColumnWidth = 170
         Me.CheckedListBox1.FormattingEnabled = True
-        Me.CheckedListBox1.Items.AddRange(New Object() {"Arinitra Chandler", "Bobby", "Christina Russell", "Dave Orth", "DDP", "Dylan", "Garett Sakahara", "Haydn Walden", "Jen", "Jim Mabes", "Josh", "King Warren", "Lexy", "Paal", "Pat McDermott", "Payge McMahon", "Ricky Tran", "Roman", "Scott French", "Stevie Richards", "Tom Walent", "Travis", "Yoga Doc"})
-        Me.CheckedListBox1.Location = New System.Drawing.Point(10, 42)
+        Me.CheckedListBox1.Items.AddRange(New Object() {"Arinitra Chandler - (5)", "Bobby - (1)", "Christina Russell - (20)", "Dave Orth - (5)", "DDP - (302)", "Dylan - (1)", "Garett Sakahara - (13)", "Haydn Walden - (49)", "Jen - (1)", "Jim Mabes - (8)", "Josh - (8)", "King Warren - (8)", "Lexy - (1)", "Paal - (3)", "Pat McDermott - (8)", "Payge McMahon - (19)", "Ricky Tran - (2)", "Roman - (2)", "Scott French - (1)", "Stevie Richards - (6)", "Tom Walent - (1)", "Travis - (1)", "Yoga Doc - (7)"})
+        Me.CheckedListBox1.Location = New System.Drawing.Point(6, 40)
         Me.CheckedListBox1.MultiColumn = True
         Me.CheckedListBox1.Name = "CheckedListBox1"
-        Me.CheckedListBox1.Size = New System.Drawing.Size(244, 184)
+        Me.CheckedListBox1.Size = New System.Drawing.Size(526, 154)
         Me.CheckedListBox1.Sorted = True
         Me.CheckedListBox1.TabIndex = 10
         '
@@ -198,9 +200,9 @@ Partial Class Form1
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(12, 554)
+        Me.ProgressBar1.Location = New System.Drawing.Point(12, 513)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(765, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(974, 23)
         Me.ProgressBar1.TabIndex = 17
         '
         'openFD
@@ -211,7 +213,7 @@ Partial Class Form1
         '
         Me.cmdImport.Location = New System.Drawing.Point(6, 19)
         Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(286, 23)
+        Me.cmdImport.Size = New System.Drawing.Size(137, 23)
         Me.cmdImport.TabIndex = 21
         Me.cmdImport.Text = "Import HTML to CSV"
         Me.cmdImport.UseVisualStyleBackColor = True
@@ -231,7 +233,7 @@ Partial Class Form1
         '
         Me.picMinDiff.Image = CType(resources.GetObject("picMinDiff.Image"), System.Drawing.Image)
         Me.picMinDiff.InitialImage = Nothing
-        Me.picMinDiff.Location = New System.Drawing.Point(165, 11)
+        Me.picMinDiff.Location = New System.Drawing.Point(186, 11)
         Me.picMinDiff.Name = "picMinDiff"
         Me.picMinDiff.Size = New System.Drawing.Size(50, 50)
         Me.picMinDiff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -240,6 +242,7 @@ Partial Class Form1
         '
         'PictureBox1
         '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
@@ -252,7 +255,7 @@ Partial Class Form1
         'picMaxDiff
         '
         Me.picMaxDiff.Image = CType(resources.GetObject("picMaxDiff.Image"), System.Drawing.Image)
-        Me.picMaxDiff.Location = New System.Drawing.Point(165, 60)
+        Me.picMaxDiff.Location = New System.Drawing.Point(186, 60)
         Me.picMaxDiff.Name = "picMaxDiff"
         Me.picMaxDiff.Size = New System.Drawing.Size(50, 50)
         Me.picMaxDiff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -272,6 +275,7 @@ Partial Class Form1
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox1.Controls.Add(Me.sldMaxLen)
         Me.GroupBox1.Controls.Add(Me.txtMinLen)
         Me.GroupBox1.Controls.Add(Me.txtMaxLen)
@@ -285,53 +289,58 @@ Partial Class Form1
         '
         'GroupBox2
         '
+        Me.GroupBox2.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox2.Controls.Add(Me.sldMinDif)
         Me.GroupBox2.Controls.Add(Me.sldMaxDif)
         Me.GroupBox2.Controls.Add(Me.picMaxDiff)
         Me.GroupBox2.Controls.Add(Me.picMinDiff)
-        Me.GroupBox2.Location = New System.Drawing.Point(556, 160)
+        Me.GroupBox2.Location = New System.Drawing.Point(740, 160)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(221, 112)
+        Me.GroupBox2.Size = New System.Drawing.Size(246, 112)
         Me.GroupBox2.TabIndex = 30
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Workout Difficulty - Min && Max"
         '
         'GroupBox3
         '
+        Me.GroupBox3.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox3.Controls.Add(Me.CheckBox2)
         Me.GroupBox3.Controls.Add(Me.CheckedListBox1)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 278)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(265, 236)
+        Me.GroupBox3.Size = New System.Drawing.Size(538, 200)
         Me.GroupBox3.TabIndex = 31
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Instructors"
         '
         'GroupBox4
         '
+        Me.GroupBox4.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox4.Controls.Add(Me.CheckBox1)
         Me.GroupBox4.Controls.Add(Me.CheckedListBox2)
-        Me.GroupBox4.Location = New System.Drawing.Point(283, 278)
+        Me.GroupBox4.Location = New System.Drawing.Point(556, 322)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(184, 156)
+        Me.GroupBox4.Size = New System.Drawing.Size(178, 156)
         Me.GroupBox4.TabIndex = 32
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Days"
         '
         'GroupBox5
         '
+        Me.GroupBox5.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox5.Controls.Add(Me.clbInclude)
-        Me.GroupBox5.Location = New System.Drawing.Point(657, 373)
+        Me.GroupBox5.Location = New System.Drawing.Point(866, 276)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(120, 94)
+        Me.GroupBox5.Size = New System.Drawing.Size(120, 89)
         Me.GroupBox5.TabIndex = 13
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Include"
         '
         'GroupBox6
         '
+        Me.GroupBox6.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox6.Controls.Add(Me.cblExclusive)
-        Me.GroupBox6.Location = New System.Drawing.Point(657, 278)
+        Me.GroupBox6.Location = New System.Drawing.Point(740, 276)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(120, 89)
         Me.GroupBox6.TabIndex = 0
@@ -340,6 +349,7 @@ Partial Class Form1
         '
         'GroupBox7
         '
+        Me.GroupBox7.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox7.Controls.Add(Me.Label1)
         Me.GroupBox7.Controls.Add(Me.cbEnableIncDif)
         Me.GroupBox7.Controls.Add(Me.TextBox3)
@@ -347,12 +357,32 @@ Partial Class Form1
         Me.GroupBox7.Controls.Add(Me.TextBox1)
         Me.GroupBox7.Controls.Add(Me.NumericUpDown2)
         Me.GroupBox7.Controls.Add(Me.NumericUpDown1)
-        Me.GroupBox7.Location = New System.Drawing.Point(473, 278)
+        Me.GroupBox7.Location = New System.Drawing.Point(556, 160)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(178, 156)
         Me.GroupBox7.TabIndex = 13
         Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Difficulty"
+        Me.GroupBox7.Text = "Length"
+        '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(6, 123)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(166, 27)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "to a maximum of 60 mins for min length and 90 mins for max length" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'cbEnableIncDif
+        '
+        Me.cbEnableIncDif.AutoSize = True
+        Me.cbEnableIncDif.Checked = True
+        Me.cbEnableIncDif.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbEnableIncDif.Location = New System.Drawing.Point(6, 17)
+        Me.cbEnableIncDif.Name = "cbEnableIncDif"
+        Me.cbEnableIncDif.Size = New System.Drawing.Size(59, 17)
+        Me.cbEnableIncDif.TabIndex = 5
+        Me.cbEnableIncDif.Text = "Enable"
+        Me.cbEnableIncDif.UseVisualStyleBackColor = True
         '
         'TextBox3
         '
@@ -396,41 +426,30 @@ Partial Class Form1
         '
         'GroupBox8
         '
+        Me.GroupBox8.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox8.Controls.Add(Me.TextBox4)
         Me.GroupBox8.Controls.Add(Me.cmdImport)
         Me.GroupBox8.Location = New System.Drawing.Point(473, 12)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(298, 141)
+        Me.GroupBox8.Size = New System.Drawing.Size(513, 141)
         Me.GroupBox8.TabIndex = 33
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Admin-y Stuff"
         '
-        'cbEnableIncDif
+        'TextBox4
         '
-        Me.cbEnableIncDif.AutoSize = True
-        Me.cbEnableIncDif.Checked = True
-        Me.cbEnableIncDif.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbEnableIncDif.Location = New System.Drawing.Point(6, 17)
-        Me.cbEnableIncDif.Name = "cbEnableIncDif"
-        Me.cbEnableIncDif.Size = New System.Drawing.Size(59, 17)
-        Me.cbEnableIncDif.TabIndex = 5
-        Me.cbEnableIncDif.Text = "Enable"
-        Me.cbEnableIncDif.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(6, 123)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(166, 27)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "to a maximum of 60 mins for min length and 90 mins for max length" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.TextBox4.Location = New System.Drawing.Point(6, 48)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(137, 87)
+        Me.TextBox4.TabIndex = 7
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.ClientSize = New System.Drawing.Size(787, 589)
+        Me.ClientSize = New System.Drawing.Size(993, 546)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.PictureBox1)
@@ -469,6 +488,7 @@ Partial Class Form1
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -507,4 +527,5 @@ Partial Class Form1
     Friend WithEvents GroupBox8 As Windows.Forms.GroupBox
     Friend WithEvents cbEnableIncDif As Windows.Forms.CheckBox
     Friend WithEvents Label1 As Windows.Forms.Label
+    Friend WithEvents TextBox4 As Windows.Forms.TextBox
 End Class
