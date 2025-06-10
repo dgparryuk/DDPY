@@ -69,7 +69,7 @@
     <StartupObject>DDPY.Form1</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>4C5347DB1AFC62FE1FC08664DC8711035A8F2851</ManifestCertificateThumbprint>

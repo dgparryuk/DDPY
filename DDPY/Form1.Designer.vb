@@ -222,10 +222,10 @@ Partial Class Form1
         '
         Me.clbInclude.CheckOnClick = True
         Me.clbInclude.FormattingEnabled = True
-        Me.clbInclude.Items.AddRange(New Object() {"Bed Flex", "Chair Force", "Jacked", "Stand Strong"})
+        Me.clbInclude.Items.AddRange(New Object() {"Bed Flex", "Chair Force", "Diamond Dozen", "Jacked", "Stand Strong"})
         Me.clbInclude.Location = New System.Drawing.Point(8, 17)
         Me.clbInclude.Name = "clbInclude"
-        Me.clbInclude.Size = New System.Drawing.Size(102, 64)
+        Me.clbInclude.Size = New System.Drawing.Size(102, 79)
         Me.clbInclude.Sorted = True
         Me.clbInclude.TabIndex = 22
         '
@@ -331,7 +331,7 @@ Partial Class Form1
         Me.GroupBox5.Controls.Add(Me.clbInclude)
         Me.GroupBox5.Location = New System.Drawing.Point(866, 276)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(120, 89)
+        Me.GroupBox5.Size = New System.Drawing.Size(120, 103)
         Me.GroupBox5.TabIndex = 13
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Include"
@@ -443,6 +443,7 @@ Partial Class Form1
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(137, 87)
         Me.TextBox4.TabIndex = 7
+        Me.TextBox4.Text = "https://csvjson.com/json2csv"
         '
         'Form1
         '

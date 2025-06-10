@@ -51,15 +51,15 @@ Public Class Form1
         If sldMinDif.Value > sldMaxDif.Value Then sldMaxDif.Value = sldMinDif.Value
         Select Case sldMinDif.Value
             Case 1
-                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\green.png")
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\green.png")
             Case 2
-                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\blue.png")
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\blue.png")
             Case 3
-                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\yellow.png")
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\yellow.png")
             Case 4
-                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\orange.png")
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\orange.png")
             Case 5
-                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\red.png")
+                picMinDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\red.png")
 
         End Select
     End Sub
@@ -67,15 +67,15 @@ Public Class Form1
         If sldMaxDif.Value < sldMinDif.Value Then sldMinDif.Value = sldMaxDif.Value
         Select Case sldMaxDif.Value
             Case 1
-                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\green.png")
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\green.png")
             Case 2
-                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\blue.png")
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\blue.png")
             Case 3
-                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\yellow.png")
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\yellow.png")
             Case 4
-                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\orange.png")
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\orange.png")
             Case 5
-                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\Parry\\source\\repos\\DDPY\\Bits\\red.png")
+                picMaxDiff.Image = New System.Drawing.Bitmap("C:\\Users\\david\\source\\repos\\dgparryuk\\DDPY\\Bits\\red.png")
 
         End Select
     End Sub
@@ -112,6 +112,8 @@ Public Class Form1
                     GlobalVariables.includeChairForce = clbInclude.GetItemChecked(i)
                 Case "Jacked"
                     GlobalVariables.includeJacked = clbInclude.GetItemChecked(i)
+                Case "Diamond Dozen"
+                    GlobalVariables.includeDD = clbInclude.GetItemChecked(i)
             End Select
             'true 
         Next
@@ -126,7 +128,7 @@ Public Class Form1
         For i = 0 To 22
             GlobalVariables.ListofInstructors(i) = CheckedListBox1.Items(i)
             GlobalVariables.ListofInstructors(i) = System.Text.RegularExpressions.Regex.Replace(GlobalVariables.ListofInstructors(i), " - .(.*)", "")
-            MsgBox(GlobalVariables.ListofInstructors(i))
+            'MsgBox(GlobalVariables.ListofInstructors(i))
             GlobalVariables.ListofInstructorsChecked(i) = CheckedListBox1.GetItemChecked(i)
         Next
         GlobalVariables.totalworkouts = GlobalVariables.daycount * 13
@@ -152,6 +154,7 @@ Public Class Form1
             If GlobalVariables.includeStandStrong = "False" And tags.Contains("Stand Strong") Then allowed = ""
             If GlobalVariables.includeChairForce = "False" And tags.Contains("Chair Force") Then allowed = ""
             If GlobalVariables.includeJacked = "False" And tags.Contains("JACKED") Then allowed = ""
+            If GlobalVariables.includeDD = "False" And tags.Contains("Diamond Dozen") Then allowed = ""
 
             If GlobalVariables.splitString(3) >= GlobalVariables.MinDif And GlobalVariables.splitString(3) <= GlobalVariables.MaxDif Then
                 If GlobalVariables.splitString(2) >= GlobalVariables.MinLen And GlobalVariables.splitString(2) <= GlobalVariables.MaxLen Then
@@ -536,6 +539,21 @@ Public Class Form1
     End Sub
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+        'new version 
+
+        'save workoutsheet - check line 180-ish starts with "var categorized =  "
+        'remove everything before the [ and the ; at the very end
+        'goto https://csvjson.com/json2csv
+        'and paste that line 
+        'serparator = Semi-colin
+        'flatten = ticked
+        'Output CSVJSON variant = ticked
+        'load into notepad++
+        'remove all commas
+        'replace all ; with ,
+
+
+
         Dim DifNum1 As Int16 = 0
         Dim DifNum2 As Int16 = 0
         Dim DifNum3 As Int16 = 0
@@ -696,6 +714,7 @@ Public Class Form1
         Next
         newstr = Join(chars, "")
         System.IO.File.WriteAllText(csvFilename, newstr)
+
         Dim outputtext
         Dim CSVFiletext As String() = System.IO.File.ReadAllLines(csvFilename)
         Dim splitString
@@ -948,4 +967,11 @@ Public Class Form1
 
     End Sub
 
+    Private Sub clbInclude_SelectedIndexChanged(sender As Object, e As EventArgs) Handles clbInclude.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
+
+    End Sub
 End Class
