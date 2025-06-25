@@ -58,6 +58,7 @@ Partial Class Form1
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.cmdImportcsv = New System.Windows.Forms.Button()
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMinDif, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMaxLen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -211,7 +212,7 @@ Partial Class Form1
         '
         'cmdImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(6, 19)
+        Me.cmdImport.Location = New System.Drawing.Point(149, 19)
         Me.cmdImport.Name = "cmdImport"
         Me.cmdImport.Size = New System.Drawing.Size(137, 23)
         Me.cmdImport.TabIndex = 21
@@ -427,6 +428,7 @@ Partial Class Form1
         'GroupBox8
         '
         Me.GroupBox8.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox8.Controls.Add(Me.cmdImportcsv)
         Me.GroupBox8.Controls.Add(Me.TextBox4)
         Me.GroupBox8.Controls.Add(Me.cmdImport)
         Me.GroupBox8.Location = New System.Drawing.Point(473, 12)
@@ -444,6 +446,15 @@ Partial Class Form1
         Me.TextBox4.Size = New System.Drawing.Size(137, 87)
         Me.TextBox4.TabIndex = 7
         Me.TextBox4.Text = "https://csvjson.com/json2csv"
+        '
+        'cmdImportcsv
+        '
+        Me.cmdImportcsv.Location = New System.Drawing.Point(6, 19)
+        Me.cmdImportcsv.Name = "cmdImportcsv"
+        Me.cmdImportcsv.Size = New System.Drawing.Size(137, 23)
+        Me.cmdImportcsv.TabIndex = 22
+        Me.cmdImportcsv.Text = "import CSV"
+        Me.cmdImportcsv.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -529,4 +540,5 @@ Partial Class Form1
     Friend WithEvents cbEnableIncDif As Windows.Forms.CheckBox
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents TextBox4 As Windows.Forms.TextBox
+    Friend WithEvents cmdImportcsv As Windows.Forms.Button
 End Class
