@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>20</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -95,12 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="faviconico.ico" />
-    <Content Include="InstructorList.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="WorkoutNumbers.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="InstructorSummary.txt" />
+    <Content Include="WorkoutNumbers.txt" />
     <None Include="App.config" />
     <Content Include="DDPY.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

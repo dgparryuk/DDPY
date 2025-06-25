@@ -57,8 +57,8 @@ Partial Class Form1
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.cmdImportcsv = New System.Windows.Forms.Button()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMinDif, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMaxLen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,7 +156,6 @@ Partial Class Form1
         Me.CheckedListBox1.CheckOnClick = True
         Me.CheckedListBox1.ColumnWidth = 170
         Me.CheckedListBox1.FormattingEnabled = True
-        Me.CheckedListBox1.Items.AddRange(New Object() {"Arinitra Chandler - (5)", "Bobby - (1)", "Christina Russell - (20)", "Dave Orth - (5)", "DDP - (302)", "Dylan - (1)", "Garett Sakahara - (13)", "Haydn Walden - (49)", "Jen - (1)", "Jim Mabes - (8)", "Josh - (8)", "King Warren - (8)", "Lexy - (1)", "Paal - (3)", "Pat McDermott - (8)", "Payge McMahon - (19)", "Ricky Tran - (2)", "Roman - (2)", "Scott French - (1)", "Stevie Richards - (6)", "Tom Walent - (1)", "Travis - (1)", "Yoga Doc - (7)"})
         Me.CheckedListBox1.Location = New System.Drawing.Point(6, 40)
         Me.CheckedListBox1.MultiColumn = True
         Me.CheckedListBox1.Name = "CheckedListBox1"
@@ -438,15 +437,6 @@ Partial Class Form1
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Admin-y Stuff"
         '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(6, 48)
-        Me.TextBox4.Multiline = True
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(137, 87)
-        Me.TextBox4.TabIndex = 7
-        Me.TextBox4.Text = "https://csvjson.com/json2csv"
-        '
         'cmdImportcsv
         '
         Me.cmdImportcsv.Location = New System.Drawing.Point(6, 19)
@@ -455,6 +445,15 @@ Partial Class Form1
         Me.cmdImportcsv.TabIndex = 22
         Me.cmdImportcsv.Text = "import CSV"
         Me.cmdImportcsv.UseVisualStyleBackColor = True
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(6, 48)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(137, 87)
+        Me.TextBox4.TabIndex = 7
+        Me.TextBox4.Text = "https://csvjson.com/json2csv"
         '
         'Form1
         '

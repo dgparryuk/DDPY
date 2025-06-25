@@ -1,6 +1,6 @@
-Level 1 - 86
-Level 2 - 106
-Level 3 - 193
-Level 4 - 63
-Level 5 - 24
-Total   - 472
+Level 1 - 95
+Level 2 - 148
+Level 3 - 235
+Level 4 - 81
+Level 5 - 31
+Total   - 590

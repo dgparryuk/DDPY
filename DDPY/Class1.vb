@@ -17,8 +17,8 @@
     Public Shared MaxDif As Integer
     Public Shared MinLen As Integer
     Public Shared MaxLen As Integer
-    Public Shared ListofInstructors(23) As String
-    Public Shared ListofInstructorsChecked(23) As String
+    Public Shared ListofInstructors(50) As String
+    Public Shared ListofInstructorsChecked(50) As String
 
     Public Shared exclusiveStandStrong As String
     Public Shared exclusiveBedFlex As String

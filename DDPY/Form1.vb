@@ -29,14 +29,15 @@ Public Class Form1
             WorkoutNumbersText = WorkoutNumbersText & WorkoutNumbers(i) & vbCrLf
         Next
         TextBox4.Text = WorkoutNumbersText
-
-        Dim InstructorNames = System.IO.File.ReadAllLines("InstructorList.txt")
-        Dim InstructorNamesList As String = ""
-        For i = 0 To InstructorNames.GetUpperBound(0)
-            InstructorNamesList = InstructorNamesList & InstructorNames(i) & vbCrLf
+        Dim summaryTxtPath As String = "InstructorSummary.txt"
+        If File.Exists(summaryTxtPath) Then
+            CheckedListBox1.Items.Clear()
+            Dim instructorLines = File.ReadAllLines(summaryTxtPath)
+            CheckedListBox1.Items.AddRange(instructorLines)
+        End If
+        For i As Integer = 0 To CheckedListBox1.Items.Count - 1
+            CheckedListBox1.SetItemChecked(i, CheckState.Checked)
         Next
-        TextBox4.Text = WorkoutNumbersText
-
     End Sub
     Private Sub sldMinLen_Scroll(sender As Object, e As EventArgs) Handles sldMinLen.Scroll
         If sldMinLen.Value > sldMaxLen.Value Then sldMaxLen.Value = sldMinLen.Value
@@ -561,9 +562,12 @@ Public Class Form1
 
                 Dim folderPath As String = folderDialog.SelectedPath
                 Dim inputPath As String = Path.Combine(folderPath, "csvjson.csv")
-                Dim outputCsvPath As String = Path.Combine(Application.StartupPath, "DDPY.csv")
-                Dim summaryTxtPath As String = Path.Combine(Application.StartupPath, "InstructorSummary.txt")
-                Dim difficultyTxtPath As String = Path.Combine(Application.StartupPath, "WorkoutNumbers.txt")
+                Dim outputCsvPath As String = "DDPY.csv"
+                Dim summaryTxtPath As String = "InstructorSummary.txt"
+                Dim difficultyTxtPath As String = "WorkoutNumbers.txt"
+                'Dim outputCsvPath As String = Path.Combine(Application.StartupPath, "DDPY.csv")
+                'Dim summaryTxtPath As String = Path.Combine(Application.StartupPath, "InstructorSummary.txt")
+                'Dim difficultyTxtPath As String = Path.Combine(Application.StartupPath, "WorkoutNumbers.txt")
 
                 If Not File.Exists(inputPath) Then
                     MessageBox.Show("File 'csvjson.csv' not found in the selected folder.")
@@ -763,5 +767,7 @@ Public Class Form1
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         End Try
+        CheckBox2.Checked = True
     End Sub
+
 End Class
