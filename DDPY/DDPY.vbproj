@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="faviconico.ico" />
-    <Content Include="InstructorList.txt" />
+    <Content Include="InstructorSummary.txt" />
     <Content Include="WorkoutNumbers.txt" />
     <None Include="App.config" />
     <None Include="csvjson.csv" />
