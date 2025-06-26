@@ -98,7 +98,6 @@
     <Content Include="InstructorSummary.txt" />
     <Content Include="WorkoutNumbers.txt" />
     <None Include="App.config" />
-    <None Include="csvjson.csv" />
     <None Include="DDPY.csv" />
     <None Include="DDPY_TemporaryKey.pfx" />
     <None Include="My Project\app.manifest" />

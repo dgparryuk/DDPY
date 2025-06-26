@@ -173,6 +173,7 @@ Public Class Form1
             Dim instructorName As String = itemText.Split("-"c)(0).Trim()
             GlobalVariables.ListofInstructors(i) = instructorName
             GlobalVariables.ListofInstructorsChecked(i) = CheckedListBox1.GetItemChecked(i)
+
         Next
 
         GlobalVariables.totalworkouts = GlobalVariables.daycount * 13
@@ -181,7 +182,7 @@ Public Class Form1
             Randomize()
             GlobalVariables.linegrab = Int(GlobalVariables.fileLines.GetUpperBound(0) * Rnd())
             GlobalVariables.splitString = Split(GlobalVariables.fileLines(GlobalVariables.linegrab), ",")
-
+            MsgBox(GlobalVariables.fileLines(GlobalVariables.linegrab))
             ' Defensive: skip if not enough columns
             If GlobalVariables.splitString.Length < 5 Then Continue Do
 
@@ -673,7 +674,7 @@ Public Class Form1
                 For Each g In grouped
                     Dim first = g.First()
                     Dim tags = g.Select(Function(x) x(tagIdx)).Distinct().ToList()
-                    Dim allText = first(titleIdx) & " " & String.Join(" ", tags)
+                    Dim allText = first(titleIdx) & " " & String.Join(";", tags)
 
                     Dim possibleInstructor As String = ""
                     Dim titleDesc As String = first(titleIdx)
@@ -765,7 +766,7 @@ Public Class Form1
                                 instructorCounts(canonicalName) = 1
                             End If
 
-                            Dim lineOut = $"{first(titleIdx)},""{canonicalName}"",{durMin},{difficulty},""{String.Join(", ", tags)}"""
+                            Dim lineOut = $"{first(titleIdx)},""{canonicalName}"",{durMin},{difficulty},{allText}"
                             outputLines.Add(lineOut)
                         Next
                     Next
