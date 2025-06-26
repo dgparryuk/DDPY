@@ -95,13 +95,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="faviconico.ico" />
-    <Content Include="InstructorSummary.txt" />
+    <Content Include="InstructorList.txt" />
     <Content Include="WorkoutNumbers.txt" />
     <None Include="App.config" />
-    <Content Include="DDPY.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="csvjson.csv" />
+    <None Include="DDPY.csv" />
     <None Include="DDPY_TemporaryKey.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\DataSources\Form1.datasource" />
