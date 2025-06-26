@@ -6,6 +6,7 @@ Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.IO
 Imports System.Linq
+Imports System.Net
 Imports System.Security.Policy
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
@@ -20,6 +21,41 @@ Module mainModule
 End Module
 
 Public Class Form1
+    Private Async Sub CheckAndUpdateFilesFromGitHub()
+        ' Replace with your actual GitHub username and repo
+        Dim githubUser As String = "dgparryuk"
+        Dim githubRepo As String = "DDPY"
+        Dim branch As String = "master" ' or "master" or your branch name
+
+        Dim files As String() = {"DDPY.csv", "InstructorSummary.txt", "WorkoutNumbers.txt"}
+
+        For Each file In files
+            Dim rawUrl As String = $"https://raw.githubusercontent.com/dgparryuk/DDPY/refs/heads/master/DDPY/{file}"
+            Dim localPath As String = Path.Combine(Application.StartupPath, file)
+            Try
+                Using client As New WebClient()
+                    ' Download the remote file content
+                    Dim remoteContent As String = Await client.DownloadStringTaskAsync(rawUrl)
+
+                    ' If the file does not exist locally, or the content is different, update it
+                    Dim needsUpdate As Boolean = True
+                    If System.IO.File.Exists(localPath) Then
+                        Dim localContent As String = System.IO.File.ReadAllText(localPath)
+                        If localContent = remoteContent Then
+                            needsUpdate = False
+                        End If
+                    End If
+
+                    If needsUpdate Then
+                        System.IO.File.WriteAllText(localPath, remoteContent)
+                        MessageBox.Show($"{file} updated from GitHub.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End Using
+            Catch ex As Exception
+                MessageBox.Show($"Error updating {file}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        Next
+    End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GlobalVariables.banged = 0
@@ -549,6 +585,12 @@ Public Class Form1
     End Sub
 
     Private Sub cmdImportcsv_Click(sender As Object, e As EventArgs) Handles cmdImportcsv.Click
+        MsgBox("log into DDPYnow website and click on workouts, make sure all work outs are visible")
+        MsgBox("save page as and then open page in a text editor, goto about line 180 (it can change) that starts 'var catergorized' and copy that entire line from [ to the last ] and remove the ;")
+        MsgBox("Goto https://csvjson.com/json2csv and paste in the Seperator to semi-colon, tick flatten, tick json varient")
+        MsgBox("click convert then download and it will save in the downloads folder, now you can carry on")
+
+
         Try
             Application.EnableVisualStyles()
 
@@ -767,7 +809,56 @@ Public Class Form1
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         End Try
+        CheckBox2.Checked = False
+        CheckBox2.Checked = True
+
+    End Sub
+
+    Private Sub cmdDownload_Click(sender As Object, e As EventArgs) Handles cmdDownload.Click
+        CheckAndUpdateFilesFromGitHub()
+        Dim summaryTxtPath As String = "InstructorSummary.txt"
+        Dim difficultyTxtPath As String = "WorkoutNumbers.txt"
+
+        ' Load WorkoutNumbers.txt into TextBox4
+        If File.Exists(difficultyTxtPath) Then
+            TextBox4.Text = File.ReadAllText(difficultyTxtPath)
+        End If
+
+        ' Load InstructorSummary.txt into CheckedListBox1
+        If File.Exists(summaryTxtPath) Then
+            CheckedListBox1.Items.Clear()
+            Dim instructorLines = File.ReadAllLines(summaryTxtPath)
+            CheckedListBox1.Items.AddRange(instructorLines)
+        End If
+        CheckBox2.Checked = False
         CheckBox2.Checked = True
     End Sub
 
+    Private Sub GroupBox4_Enter(sender As Object, e As EventArgs) Handles GroupBox4.Enter
+
+    End Sub
+
+    Private Sub GroupBox5_Enter(sender As Object, e As EventArgs) Handles GroupBox5.Enter
+
+    End Sub
+
+    Private Sub GroupBox6_Enter(sender As Object, e As EventArgs) Handles GroupBox6.Enter
+
+    End Sub
+
+    Private Sub GroupBox8_Enter(sender As Object, e As EventArgs) Handles GroupBox8.Enter
+
+    End Sub
+
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
+
+    End Sub
+
+    Private Sub GroupBox7_Enter(sender As Object, e As EventArgs) Handles GroupBox7.Enter
+
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
+    End Sub
 End Class
