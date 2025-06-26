@@ -182,7 +182,7 @@ Public Class Form1
             Randomize()
             GlobalVariables.linegrab = Int(GlobalVariables.fileLines.GetUpperBound(0) * Rnd())
             GlobalVariables.splitString = Split(GlobalVariables.fileLines(GlobalVariables.linegrab), ",")
-            MsgBox(GlobalVariables.fileLines(GlobalVariables.linegrab))
+
             ' Defensive: skip if not enough columns
             If GlobalVariables.splitString.Length < 5 Then Continue Do
 
@@ -586,10 +586,10 @@ Public Class Form1
     End Sub
 
     Private Sub cmdImportcsv_Click(sender As Object, e As EventArgs) Handles cmdImportcsv.Click
-        MsgBox("log into DDPYnow website and click on workouts, make sure all work outs are visible")
-        MsgBox("save page as and then open page in a text editor, goto about line 180 (it can change) that starts 'var catergorized' and copy that entire line from [ to the last ] and remove the ;")
-        MsgBox("Goto https://csvjson.com/json2csv and paste in the Seperator to semi-colon, tick flatten, tick json varient")
-        MsgBox("click convert then download and it will save in the downloads folder, now you can carry on")
+        'MsgBox("log into DDPYnow website and click on workouts, make sure all work outs are visible")
+        'MsgBox("save page as and then open page in a text editor, goto about line 180 (it can change) that starts 'var catergorized' and copy that entire line from [ to the last ] and remove the ;")
+        'MsgBox("Goto https://csvjson.com/json2csv and paste in the Seperator to semi-colon, tick flatten, tick json varient")
+        'MsgBox("click convert then download and it will save in the downloads folder, now you can carry on")
 
 
         Try
@@ -668,7 +668,11 @@ Public Class Form1
 
                 ' Group by unique video identity (no description)
                 Dim grouped = lines.Skip(1).
-                Select(Function(line) line.Split(","c)).
+                Select(Function(line)
+                           ' Replace unicode escapes with actual characters
+                           line = line.Replace("\u0026", "&").Replace("\u0027", "'")
+                           Return line.Split(","c)
+                       End Function).
                 GroupBy(Function(x) String.Join("|", x(titleIdx), x(diffIdx), x(durIdx)))
 
                 For Each g In grouped
@@ -766,7 +770,10 @@ Public Class Form1
                                 instructorCounts(canonicalName) = 1
                             End If
 
-                            Dim lineOut = $"{first(titleIdx)},""{canonicalName}"",{durMin},{difficulty},{allText}"
+                            Dim safeTitle = first(titleIdx).Replace("""", """""")
+                            Dim safeInstructor = canonicalName.Replace("""", """""")
+                            Dim safeTags = String.Join("; ", tags).Replace("""", """""")
+                            Dim lineOut = $"{safeTitle},{safeInstructor},{durMin},{difficulty},{safeTags}"
                             outputLines.Add(lineOut)
                         Next
                     Next
