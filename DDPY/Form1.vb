@@ -151,16 +151,14 @@ Public Class Form1
                     GlobalVariables.includeChairForce = clbInclude.GetItemChecked(i)
                 Case "Jacked"
                     GlobalVariables.includeJacked = clbInclude.GetItemChecked(i)
-                Case "Diamond Dozen"
-                    GlobalVariables.includeDD = clbInclude.GetItemChecked(i)
             End Select
         Next
 
         ' Ensure include is set if exclusive is set
-        If GlobalVariables.exclusiveStandStrong = "True" Then GlobalVariables.includeStandStrong = "True"
-        If GlobalVariables.exclusiveBedFlex = "True" Then GlobalVariables.includeBedFlex = "True"
-        If GlobalVariables.exclusiveChairForce = "True" Then GlobalVariables.includeChairForce = "True"
-        If GlobalVariables.exclusiveJacked = "True" Then GlobalVariables.includeJacked = "True"
+        If GlobalVariables.exclusiveStandStrong = True Then GlobalVariables.includeStandStrong = True
+        If GlobalVariables.exclusiveBedFlex = True Then GlobalVariables.includeBedFlex = True
+        If GlobalVariables.exclusiveChairForce = True Then GlobalVariables.includeChairForce = True
+        If GlobalVariables.exclusiveJacked = True Then GlobalVariables.includeJacked = True
 
         For i = 0 To 6
             GlobalVariables.days(i) = CheckedListBox2.GetItemChecked(i)
@@ -189,18 +187,18 @@ Public Class Form1
             Dim tags As String = GlobalVariables.splitString(4)
             Dim allowed As String = ""
 
-            If GlobalVariables.exclusiveBedFlex = "True" And tags.Contains("Bed Flex") Then allowed = "yes"
-            If GlobalVariables.exclusiveStandStrong = "True" And tags.Contains("Stand Strong") Then allowed = "yes"
-            If GlobalVariables.exclusiveChairForce = "True" And tags.Contains("Chair Force") Then allowed = "yes"
-            If GlobalVariables.exclusiveJacked = "True" And tags.Contains("JACKED") Then allowed = "yes"
+            If GlobalVariables.exclusiveBedFlex = True And tags.Contains("Bed Flex") Then allowed = "yes"
+            If GlobalVariables.exclusiveStandStrong = True And tags.Contains("Stand Strong") Then allowed = "yes"
+            If GlobalVariables.exclusiveChairForce = True And tags.Contains("Chair Force") Then allowed = "yes"
+            If GlobalVariables.exclusiveJacked = True And tags.Contains("JACKED") Then allowed = "yes"
 
-            If GlobalVariables.exclusiveStandStrong = "False" And GlobalVariables.exclusiveBedFlex = "False" And GlobalVariables.exclusiveChairForce = "False" And GlobalVariables.exclusiveJacked = "False" Then allowed = "yes"
+            If GlobalVariables.exclusiveStandStrong = False And GlobalVariables.exclusiveBedFlex = False And GlobalVariables.exclusiveChairForce = False And GlobalVariables.exclusiveJacked = False Then allowed = "yes"
 
-            If GlobalVariables.includeBedFlex = "False" And tags.Contains("Bed Flex") Then allowed = ""
-            If GlobalVariables.includeStandStrong = "False" And tags.Contains("Stand Strong") Then allowed = ""
-            If GlobalVariables.includeChairForce = "False" And tags.Contains("Chair Force") Then allowed = ""
-            If GlobalVariables.includeJacked = "False" And tags.Contains("JACKED") Then allowed = ""
-            If GlobalVariables.includeDD = "False" And tags.Contains("Diamond Dozen") Then allowed = ""
+            If GlobalVariables.includeBedFlex = False And tags.Contains("Bed Flex") Then allowed = ""
+            If GlobalVariables.includeStandStrong = False And tags.Contains("Stand Strong") Then allowed = ""
+            If GlobalVariables.includeChairForce = False And tags.Contains("Chair Force") Then allowed = ""
+            If GlobalVariables.includeJacked = False And tags.Contains("JACKED") Then allowed = ""
+            If tags.Contains("Diamond Dozen") Or GlobalVariables.splitString(0).Contains("Diamond Dozen") Then allowed = ""
 
             ' Convert to integer for comparison
             Dim workoutDif As Integer
@@ -211,6 +209,7 @@ Public Class Form1
             If workoutDif >= GlobalVariables.MinDif AndAlso workoutDif <= GlobalVariables.MaxDif Then
                 If workoutLen >= GlobalVariables.MinLen AndAlso workoutLen <= GlobalVariables.MaxLen Then
                     If allowed = "yes" Then
+                        'MsgBox(tags)
                         For i = 0 To instructorCount - 1
                             Dim Item As Object = GlobalVariables.ListofInstructors(i)
                             If GlobalVariables.ListofInstructorsChecked(i) = True AndAlso Item = GlobalVariables.splitString(1) Then

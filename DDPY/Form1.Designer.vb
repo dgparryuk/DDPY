@@ -48,16 +48,16 @@ Partial Class Form1
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.cbEnableIncDif = New System.Windows.Forms.CheckBox()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.cmdImportcsv = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.cmdImportcsv = New System.Windows.Forms.Button()
         Me.cmdDownload = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.sldMinLen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMinDif, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sldMaxLen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -215,7 +215,7 @@ Partial Class Form1
         Me.clbInclude.Items.AddRange(New Object() {"Bed Flex", "Chair Force", "Diamond Dozen", "Jacked", "Stand Strong"})
         Me.clbInclude.Location = New System.Drawing.Point(8, 17)
         Me.clbInclude.Name = "clbInclude"
-        Me.clbInclude.Size = New System.Drawing.Size(102, 79)
+        Me.clbInclude.Size = New System.Drawing.Size(102, 94)
         Me.clbInclude.Sorted = True
         Me.clbInclude.TabIndex = 22
         '
@@ -259,7 +259,7 @@ Partial Class Form1
         Me.cblExclusive.Items.AddRange(New Object() {"Bed Flex", "Chair Force", "Jacked", "Stand Strong"})
         Me.cblExclusive.Location = New System.Drawing.Point(8, 17)
         Me.cblExclusive.Name = "cblExclusive"
-        Me.cblExclusive.Size = New System.Drawing.Size(102, 64)
+        Me.cblExclusive.Size = New System.Drawing.Size(102, 79)
         Me.cblExclusive.Sorted = True
         Me.cblExclusive.TabIndex = 27
         '
@@ -321,7 +321,7 @@ Partial Class Form1
         Me.GroupBox5.Controls.Add(Me.clbInclude)
         Me.GroupBox5.Location = New System.Drawing.Point(448, 205)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(120, 103)
+        Me.GroupBox5.Size = New System.Drawing.Size(120, 122)
         Me.GroupBox5.TabIndex = 13
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Include"
@@ -330,9 +330,9 @@ Partial Class Form1
         '
         Me.GroupBox6.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox6.Controls.Add(Me.cblExclusive)
-        Me.GroupBox6.Location = New System.Drawing.Point(448, 314)
+        Me.GroupBox6.Location = New System.Drawing.Point(448, 333)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(120, 89)
+        Me.GroupBox6.Size = New System.Drawing.Size(120, 110)
         Me.GroupBox6.TabIndex = 0
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Exclusively"
@@ -352,6 +352,33 @@ Partial Class Form1
         Me.GroupBox7.TabIndex = 13
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Length"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(64, 81)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(38, 13)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "weeks"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(64, 59)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(72, 13)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "minutes every"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(5, 37)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(132, 13)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Increase Min/Max time by "
         '
         'cbEnableIncDif
         '
@@ -392,15 +419,6 @@ Partial Class Form1
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Workouts"
         '
-        'cmdImportcsv
-        '
-        Me.cmdImportcsv.Location = New System.Drawing.Point(264, 12)
-        Me.cmdImportcsv.Name = "cmdImportcsv"
-        Me.cmdImportcsv.Size = New System.Drawing.Size(137, 23)
-        Me.cmdImportcsv.TabIndex = 22
-        Me.cmdImportcsv.Text = "import CSV"
-        Me.cmdImportcsv.UseVisualStyleBackColor = True
-        '
         'TextBox4
         '
         Me.TextBox4.Location = New System.Drawing.Point(6, 15)
@@ -410,6 +428,15 @@ Partial Class Form1
         Me.TextBox4.TabIndex = 7
         Me.TextBox4.Text = "https://csvjson.com/json2csv"
         '
+        'cmdImportcsv
+        '
+        Me.cmdImportcsv.Location = New System.Drawing.Point(264, 12)
+        Me.cmdImportcsv.Name = "cmdImportcsv"
+        Me.cmdImportcsv.Size = New System.Drawing.Size(137, 23)
+        Me.cmdImportcsv.TabIndex = 22
+        Me.cmdImportcsv.Text = "import CSV"
+        Me.cmdImportcsv.UseVisualStyleBackColor = True
+        '
         'cmdDownload
         '
         Me.cmdDownload.Location = New System.Drawing.Point(264, 41)
@@ -418,33 +445,6 @@ Partial Class Form1
         Me.cmdDownload.TabIndex = 34
         Me.cmdDownload.Text = "Download Latest Versions"
         Me.cmdDownload.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(5, 37)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(132, 13)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Increase Min/Max time by "
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(64, 59)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(72, 13)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "minutes every"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(64, 81)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(38, 13)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "weeks"
         '
         'Form1
         '

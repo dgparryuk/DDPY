@@ -20,14 +20,16 @@
     Public Shared ListofInstructors(50) As String
     Public Shared ListofInstructorsChecked(50) As String
 
-    Public Shared exclusiveStandStrong As String
-    Public Shared exclusiveBedFlex As String
-    Public Shared exclusiveChairForce As String
-    Public Shared exclusiveJacked As String
-    Public Shared includeStandStrong As String
-    Public Shared includeBedFlex As String
-    Public Shared includeChairForce As String
-    Public Shared includeJacked As String
-    Public Shared includeDD As String
+    Public Shared exclusiveStandStrong As Boolean
+    Public Shared exclusiveBedFlex As Boolean
+    Public Shared exclusiveChairForce As Boolean
+    Public Shared exclusiveChairWarrior As Boolean
+    Public Shared exclusiveJacked As Boolean
+    Public Shared includeStandStrong As Boolean
+    Public Shared includeBedFlex As Boolean
+    Public Shared includeChairForce As Boolean
+    Public Shared includeChairWarrior As Boolean
+    Public Shared includeJacked As Boolean
+    Public Shared includeDD As Boolean
 End Class
 
