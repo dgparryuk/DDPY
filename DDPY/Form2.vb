@@ -1,4 +1,6 @@
-﻿Imports System.Linq
+﻿Imports System.Drawing
+Imports System.Drawing.Printing
+Imports System.Linq
 Imports System.Windows.Forms
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
@@ -34,5 +36,42 @@ Public Class Form2
         If GlobalVariables.banged = False Then
             MsgBox("bugger")
         End If
+    End Sub
+
+    Private WithEvents printDoc As New PrintDocument
+
+    Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
+        ' Set landscape orientation
+        printDoc.DefaultPageSettings.Landscape = True
+
+        ' Optionally show print dialog
+        Dim dlg As New PrintDialog()
+        dlg.Document = printDoc
+        If dlg.ShowDialog() = DialogResult.OK Then
+            printDoc.Print()
+        End If
+    End Sub
+
+    Private Sub printDoc_PrintPage(sender As Object, e As PrintPageEventArgs) Handles printDoc.PrintPage
+        ' Capture the form as a bitmap
+        Using bmp As New Bitmap(Me.Width, Me.Height)
+            Me.DrawToBitmap(bmp, New Rectangle(0, 0, Me.Width, Me.Height))
+
+            ' Calculate scaling to fit the page
+            Dim scaleX As Single = e.MarginBounds.Width / bmp.Width
+            Dim scaleY As Single = e.MarginBounds.Height / bmp.Height
+            Dim scale As Single = Math.Min(scaleX, scaleY)
+
+            Dim printWidth As Integer = CInt(bmp.Width * scale)
+            Dim printHeight As Integer = CInt(bmp.Height * scale)
+
+            ' Center the image
+            Dim x As Integer = e.MarginBounds.Left + (e.MarginBounds.Width - printWidth) \ 2
+            Dim y As Integer = e.MarginBounds.Top + (e.MarginBounds.Height - printHeight) \ 2
+
+            e.Graphics.DrawImage(bmp, x, y, printWidth, printHeight)
+        End Using
+
+        e.HasMorePages = False
     End Sub
 End Class

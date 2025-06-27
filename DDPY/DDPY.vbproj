@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\david\OneDrive - Delta Computing\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\david\OneDrive - Delta Computing\Desktop\DDPY\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -98,7 +98,7 @@
     <Content Include="InstructorSummary.txt" />
     <Content Include="WorkoutNumbers.txt" />
     <None Include="App.config" />
-    <None Include="DDPY.csv" />
+    <Content Include="DDPY.csv" />
     <None Include="DDPY_TemporaryKey.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\DataSources\Form1.datasource" />

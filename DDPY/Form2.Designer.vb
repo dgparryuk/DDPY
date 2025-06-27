@@ -134,6 +134,7 @@ Partial Class Form2
         Me.txtTue13 = New System.Windows.Forms.TextBox()
         Me.txtMon13 = New System.Windows.Forms.TextBox()
         Me.txtSun13 = New System.Windows.Forms.TextBox()
+        Me.cmdPrint = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtSun1
@@ -1461,13 +1462,23 @@ Partial Class Form2
         Me.txtSun13.TabIndex = 124
         Me.txtSun13.WordWrap = False
         '
+        'cmdPrint
+        '
+        Me.cmdPrint.Location = New System.Drawing.Point(1114, 546)
+        Me.cmdPrint.Name = "cmdPrint"
+        Me.cmdPrint.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPrint.TabIndex = 132
+        Me.cmdPrint.Text = "Print"
+        Me.cmdPrint.UseVisualStyleBackColor = True
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.ClientSize = New System.Drawing.Size(1201, 575)
+        Me.ClientSize = New System.Drawing.Size(1221, 581)
+        Me.Controls.Add(Me.cmdPrint)
         Me.Controls.Add(Me.TextBox104)
         Me.Controls.Add(Me.txtSat13)
         Me.Controls.Add(Me.txtFri13)
@@ -1699,4 +1710,5 @@ Partial Class Form2
     Friend WithEvents txtTue13 As Windows.Forms.TextBox
     Friend WithEvents txtMon13 As Windows.Forms.TextBox
     Friend WithEvents txtSun13 As Windows.Forms.TextBox
+    Friend WithEvents cmdPrint As Windows.Forms.Button
 End Class
