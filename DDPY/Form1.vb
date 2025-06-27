@@ -10,8 +10,6 @@ Imports System.Net
 Imports System.Security.Policy
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar
 
 Module mainModule
 
@@ -164,6 +162,7 @@ Public Class Form1
             GlobalVariables.days(i) = CheckedListBox2.GetItemChecked(i)
         Next
 
+
         ' Use actual count of instructors
         Dim instructorCount As Integer = CheckedListBox1.Items.Count
         For i = 0 To instructorCount - 1
@@ -197,7 +196,7 @@ Public Class Form1
             If GlobalVariables.includeBedFlex = False And tags.Contains("Bed Flex") Then allowed = ""
             If GlobalVariables.includeStandStrong = False And tags.Contains("Stand Strong") Then allowed = ""
             If GlobalVariables.includeChairForce = False And tags.Contains("Chair Force") Then allowed = ""
-            If GlobalVariables.includeJacked = False And tags.Contains("JACKED") Then allowed = ""
+            If GlobalVariables.includeJacked = False And (tags.Contains("JACKED") Or tags.Contains("Powercuffs")) Then allowed = ""
             If tags.Contains("Diamond Dozen") Or GlobalVariables.splitString(0).Contains("Diamond Dozen") Then allowed = ""
 
             ' Convert to integer for comparison

@@ -2,7 +2,8 @@
 Imports System.Drawing.Printing
 Imports System.Linq
 Imports System.Windows.Forms
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports System.IO
+Imports System.Collections.Generic
 
 Public Class Form2
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,6 +37,8 @@ Public Class Form2
         If GlobalVariables.banged = False Then
             MsgBox("bugger")
         End If
+        ' Attach click event to all TextBoxes that start with "txt"
+
     End Sub
 
     Private WithEvents printDoc As New PrintDocument
@@ -74,4 +77,6 @@ Public Class Form2
 
         e.HasMorePages = False
     End Sub
+
+
 End Class

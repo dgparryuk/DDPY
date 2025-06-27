@@ -5,11 +5,11 @@
     Public Shared workoutsdone As Integer = 0
     Public Shared fileLines As String() = System.IO.File.ReadAllLines("DDPY.csv")
     Public Shared linegrab As Integer
-    Public Shared workoutlist(92) As String
-    Public Shared instructorlist(92) As String
-    Public Shared Lengthlist(92) As String
-    Public Shared Difflist(92) As String
-    Public Shared days(7) As String
+    Public Shared workoutlist(110) As String
+    Public Shared instructorlist(110) As String
+    Public Shared Lengthlist(110) As String
+    Public Shared Difflist(110) As String
+    Public Shared days(8) As String
     Public Shared banged As Boolean
     Public Shared presorted As String
 
