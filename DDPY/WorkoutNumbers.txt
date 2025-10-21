@@ -1,6 +1,6 @@
 Level 1 - 95
 Level 2 - 152
-Level 3 - 236
+Level 3 - 238
 Level 4 - 83
 Level 5 - 31
 Total   - 599
